@@ -330,8 +330,11 @@
 
     .lumin-btn:disabled {
       cursor: not-allowed;
-      opacity: 0.4;
+      opacity: 0.5;
       transform: none;
+      background: var(--lumin-bg-tertiary);
+      color: var(--lumin-text-muted);
+      border: 1px solid var(--lumin-border-color);
     }
 
     .lumin-btn--primary {
@@ -382,7 +385,7 @@
     .lumin-btn--destructive {
       background: transparent;
       color: var(--lumin-error);
-      border: 1px solid color-mix(in oklab, var(--lumin-error) 20%, transparent);
+      border: 1px solid var(--lumin-error);
       border-radius: var(--lumin-radius-full);
       padding: 10px 20px;
       font-size: 14px;
@@ -390,7 +393,13 @@
     }
 
     .lumin-btn--destructive:hover {
-      background: color-mix(in oklab, var(--lumin-error) 6%, transparent);
+      background: var(--lumin-error-light);
+      color: var(--lumin-error);
+    }
+
+    [data-theme='light'] .lumin-btn--destructive {
+      background: var(--lumin-error-light);
+      color: var(--lumin-error);
     }
 
     .lumin-btn--sm {
@@ -641,15 +650,16 @@
     }
 
     .color-swatch span {
-      background: oklch(0% 0 0 / 0.6);
-      padding: 2px 6px;
-      border-radius: 4px;
+      background: oklch(0% 0 0 / 0.7);
+      padding: 4px 8px;
+      border-radius: var(--lumin-radius-sm);
       color: oklch(100% 0 0);
+      font-weight: var(--lumin-font-medium);
     }
 
     [data-theme='light'] .color-swatch span {
-      background: oklch(100% 0 0 / 0.8);
-      color: oklch(20% 0.002 252);
+      background: oklch(0% 0 0 / 0.75);
+      color: oklch(100% 0 0);
     }
 
     /* ================================================================
