@@ -3,11 +3,772 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Lumin Design System</title>
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <title>Lumin UI/UX - 设计系统预览</title>
+  <style>
+    /* ================================================================
+       Lumin Design Tokens
+       ================================================================ */
+    [data-theme='dark'] {
+      --lumin-bg-primary: oklch(12% 0.006 252);
+      --lumin-bg-secondary: oklch(15.5% 0.007 252);
+      --lumin-bg-tertiary: oklch(18.5% 0.007 252);
+      --lumin-bg-elevated: oklch(21% 0.007 252);
+      --lumin-bg-input: oklch(17% 0.006 252);
+      --lumin-bg-overlay: oklch(8% 0.005 252 / 0.85);
+      --lumin-text: oklch(96% 0.002 252);
+      --lumin-text-primary: oklch(96% 0.002 252);
+      --lumin-text-secondary: oklch(72% 0.003 252);
+      --lumin-text-tertiary: oklch(54% 0.002 252);
+      --lumin-text-muted: oklch(40% 0.002 252);
+      --lumin-border-color: oklch(100% 0 0 / 0.08);
+      --lumin-border-color-light: oklch(100% 0 0 / 0.05);
+      --lumin-primary: oklch(65% 0.19 252);
+      --lumin-primary-hover: oklch(70% 0.17 252);
+      --lumin-primary-light: oklch(65% 0.19 252 / 0.12);
+      --lumin-success: oklch(68% 0.19 142);
+      --lumin-success-light: oklch(68% 0.19 142 / 0.15);
+      --lumin-warning: oklch(72% 0.17 75);
+      --lumin-warning-light: oklch(72% 0.17 75 / 0.15);
+      --lumin-error: oklch(58% 0.24 27);
+      --lumin-error-light: oklch(58% 0.24 27 / 0.15);
+      --lumin-info: oklch(65% 0.19 252);
+      --lumin-info-light: oklch(65% 0.19 252 / 0.15);
+      --lumin-shadow-sm: 0 1px 3px oklch(0% 0 0 / 0.3);
+      --lumin-shadow-md: 0 4px 12px oklch(0% 0 0 / 0.35);
+      --lumin-shadow-lg: 0 8px 32px oklch(0% 0 0 / 0.4);
+      --lumin-glass-sidebar: oklch(14% 0.006 252 / 0.78);
+      --lumin-glass-content: oklch(15% 0.006 252 / 0.72);
+      --lumin-accent: var(--lumin-primary);
+      --lumin-accent-soft: var(--lumin-primary-light);
+      --lumin-text-inverse: oklch(100% 0 0);
+    }
+
+    [data-theme='light'] {
+      --lumin-bg-primary: oklch(99% 0.002 252);
+      --lumin-bg-secondary: oklch(96.5% 0.003 252);
+      --lumin-bg-tertiary: oklch(94% 0.004 252);
+      --lumin-bg-elevated: oklch(100% 0 0);
+      --lumin-bg-input: oklch(100% 0 0);
+      --lumin-bg-overlay: oklch(0% 0 0 / 0.45);
+      --lumin-text: oklch(22% 0.002 252);
+      --lumin-text-primary: oklch(20% 0.002 252);
+      --lumin-text-secondary: oklch(38% 0.002 252);
+      --lumin-text-tertiary: oklch(52% 0.001 252);
+      --lumin-text-muted: oklch(62% 0.001 252);
+      --lumin-border-color: oklch(0% 0 0 / 0.08);
+      --lumin-border-color-light: oklch(0% 0 0 / 0.05);
+      --lumin-primary: oklch(52% 0.21 252);
+      --lumin-primary-hover: oklch(56% 0.19 252);
+      --lumin-primary-light: oklch(52% 0.21 252 / 0.1);
+      --lumin-success: oklch(55% 0.19 142);
+      --lumin-success-light: oklch(55% 0.19 142 / 0.12);
+      --lumin-warning: oklch(58% 0.17 75);
+      --lumin-warning-light: oklch(58% 0.17 75 / 0.12);
+      --lumin-error: oklch(48% 0.24 27);
+      --lumin-error-light: oklch(48% 0.24 27 / 0.12);
+      --lumin-info: oklch(52% 0.21 252);
+      --lumin-info-light: oklch(52% 0.21 252 / 0.1);
+      --lumin-shadow-sm: 0 1px 3px oklch(0% 0 0 / 0.06);
+      --lumin-shadow-md: 0 4px 12px oklch(0% 0 0 / 0.08);
+      --lumin-shadow-lg: 0 8px 32px oklch(0% 0 0 / 0.1);
+      --lumin-glass-sidebar: oklch(100% 0 0 / 0.78);
+      --lumin-glass-content: oklch(100% 0 0 / 0.72);
+      --lumin-accent: var(--lumin-primary);
+      --lumin-accent-soft: var(--lumin-primary-light);
+      --lumin-text-inverse: oklch(100% 0 0);
+    }
+
+    :root {
+      --lumin-space-xs: 4px;
+      --lumin-space-sm: 8px;
+      --lumin-space-md: 12px;
+      --lumin-space-lg: 16px;
+      --lumin-space-xl: 24px;
+      --lumin-space-2xl: 32px;
+      --lumin-space-3xl: 48px;
+      --lumin-radius-xs: 4px;
+      --lumin-radius-sm: 6px;
+      --lumin-radius-md: 10px;
+      --lumin-radius-lg: 16px;
+      --lumin-radius-xl: 20px;
+      --lumin-radius-2xl: 28px;
+      --lumin-radius-full: 9999px;
+      --lumin-ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+      --lumin-transition-fast: 120ms var(--lumin-ease-out-quart);
+      --lumin-transition-normal: 250ms var(--lumin-ease-out-quart);
+      --lumin-font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      --lumin-font-mono: 'JetBrains Mono', ui-monospace, monospace;
+      --lumin-text-xs: 11px;
+      --lumin-text-sm: 12px;
+      --lumin-text-base: 13px;
+      --lumin-text-lg: 15px;
+      --lumin-text-xl: 17px;
+      --lumin-text-2xl: 20px;
+      --lumin-text-3xl: 24px;
+      --lumin-font-normal: 400;
+      --lumin-font-medium: 500;
+      --lumin-font-semibold: 600;
+      --lumin-font-bold: 700;
+    }
+
+    /* ================================================================
+       Global Styles
+       ================================================================ */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--lumin-font-sans);
+      font-size: var(--lumin-text-base);
+      line-height: 1.5;
+      color: var(--lumin-text-primary);
+      background: var(--lumin-bg-primary);
+      min-height: 100vh;
+    }
+
+    :focus-visible {
+      outline: 2px solid var(--lumin-accent);
+      outline-offset: 2px;
+    }
+
+    ::selection {
+      background: var(--lumin-accent-soft);
+    }
+
+    /* ================================================================
+       Layout
+       ================================================================ */
+    .preview-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: var(--lumin-space-3xl) var(--lumin-space-xl);
+    }
+
+    .preview-header {
+      text-align: center;
+      margin-bottom: var(--lumin-space-3xl);
+    }
+
+    .preview-header h1 {
+      font-size: var(--lumin-text-3xl);
+      font-weight: var(--lumin-font-bold);
+      margin-bottom: var(--lumin-space-sm);
+    }
+
+    .preview-header p {
+      color: var(--lumin-text-secondary);
+      font-size: var(--lumin-text-lg);
+    }
+
+    .preview-section {
+      margin-bottom: var(--lumin-space-3xl);
+    }
+
+    .preview-section h2 {
+      font-size: var(--lumin-text-2xl);
+      font-weight: var(--lumin-font-semibold);
+      margin-bottom: var(--lumin-space-lg);
+      padding-bottom: var(--lumin-space-sm);
+      border-bottom: 1px solid var(--lumin-border-color-light);
+    }
+
+    .preview-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--lumin-space-md);
+      align-items: center;
+      margin-bottom: var(--lumin-space-lg);
+    }
+
+    .preview-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: var(--lumin-space-lg);
+    }
+
+    .theme-toggle {
+      position: fixed;
+      top: var(--lumin-space-lg);
+      right: var(--lumin-space-lg);
+      z-index: 100;
+    }
+
+    /* ================================================================
+       Buttons
+       ================================================================ */
+    .lumin-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--lumin-space-sm);
+      padding: 8px 14px;
+      background: transparent;
+      border: none;
+      border-radius: var(--lumin-radius-sm);
+      font-family: inherit;
+      font-size: var(--lumin-text-base);
+      font-weight: var(--lumin-font-normal);
+      line-height: 1.3;
+      color: var(--lumin-text-secondary);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background var(--lumin-transition-fast),
+                  color var(--lumin-transition-fast),
+                  transform var(--lumin-transition-fast);
+    }
+
+    .lumin-btn:hover {
+      background: color-mix(in oklab, var(--lumin-text) 3%, transparent);
+      color: var(--lumin-text-primary);
+      transform: translateY(-1px);
+    }
+
+    .lumin-btn:active {
+      background: color-mix(in oklab, var(--lumin-text) 5%, transparent);
+      transform: translateY(0) scale(0.98);
+    }
+
+    .lumin-btn:disabled {
+      cursor: not-allowed;
+      opacity: 0.4;
+      transform: none;
+    }
+
+    .lumin-btn--primary {
+      background: var(--lumin-accent);
+      color: oklch(100% 0 0);
+      border-radius: var(--lumin-radius-full);
+      padding: 10px 20px;
+      font-size: 14px;
+      font-weight: var(--lumin-font-medium);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .lumin-btn--primary::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 50%;
+      background: linear-gradient(180deg, oklch(100% 0 0 / 0.12) 0%, transparent 100%);
+      pointer-events: none;
+    }
+
+    .lumin-btn--primary:hover {
+      background: var(--lumin-primary-hover);
+      color: oklch(100% 0 0);
+      transform: translateY(-1px);
+    }
+
+    .lumin-btn--primary:active {
+      transform: translateY(0) scale(0.98);
+    }
+
+    .lumin-btn--secondary {
+      background: transparent;
+      color: var(--lumin-accent);
+      border: 1px solid var(--lumin-accent);
+      border-radius: var(--lumin-radius-full);
+      padding: 10px 20px;
+      font-size: 14px;
+      font-weight: var(--lumin-font-medium);
+    }
+
+    .lumin-btn--secondary:hover {
+      background: var(--lumin-accent-soft);
+      color: var(--lumin-accent);
+    }
+
+    .lumin-btn--destructive {
+      background: transparent;
+      color: var(--lumin-error);
+      border: 1px solid color-mix(in oklab, var(--lumin-error) 20%, transparent);
+      border-radius: var(--lumin-radius-full);
+      padding: 10px 20px;
+      font-size: 14px;
+      font-weight: var(--lumin-font-medium);
+    }
+
+    .lumin-btn--destructive:hover {
+      background: color-mix(in oklab, var(--lumin-error) 6%, transparent);
+    }
+
+    .lumin-btn--sm {
+      padding: 6px 10px;
+      font-size: var(--lumin-text-sm);
+    }
+
+    .lumin-btn--lg {
+      padding: 12px 24px;
+      font-size: var(--lumin-text-lg);
+    }
+
+    /* ================================================================
+       Cards — Double-Bezel
+       ================================================================ */
+    .lumin-card {
+      position: relative;
+      background: var(--lumin-bg-secondary);
+      border-radius: var(--lumin-radius-lg);
+      padding: var(--lumin-space-xl);
+      box-shadow: inset 0 1px 1px oklch(100% 0 0 / 0.06);
+    }
+
+    .lumin-card::before {
+      content: '';
+      position: absolute;
+      inset: -1px;
+      background: var(--lumin-border-color-light);
+      border-radius: calc(var(--lumin-radius-lg) + 1px);
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .lumin-card h3 {
+      font-size: var(--lumin-text-lg);
+      font-weight: var(--lumin-font-semibold);
+      margin-bottom: var(--lumin-space-sm);
+    }
+
+    .lumin-card p {
+      color: var(--lumin-text-secondary);
+      font-size: var(--lumin-text-sm);
+    }
+
+    .lumin-card--subtle {
+      background: var(--lumin-bg-tertiary);
+      border-radius: var(--lumin-radius-md);
+      border: 1px solid var(--lumin-border-color-light);
+      box-shadow: inset 0 1px 1px oklch(100% 0 0 / 0.04);
+    }
+
+    /* ================================================================
+       Input
+       ================================================================ */
+    .lumin-input {
+      width: 100%;
+      padding: 9px 14px;
+      border: 1px solid var(--lumin-border-color-light);
+      border-radius: var(--lumin-radius-md);
+      font-family: inherit;
+      font-size: var(--lumin-text-base);
+      color: var(--lumin-text-primary);
+      outline: none;
+      background: var(--lumin-bg-input);
+      color-scheme: dark light;
+      transition: border-color var(--lumin-transition-fast),
+                  box-shadow var(--lumin-transition-fast);
+    }
+
+    .lumin-input::placeholder {
+      color: var(--lumin-text-muted);
+    }
+
+    .lumin-input:hover:not(:disabled):not(:focus) {
+      border-color: var(--lumin-border-color);
+    }
+
+    .lumin-input:focus {
+      border-color: var(--lumin-primary);
+      box-shadow: 0 0 0 3px var(--lumin-primary-light);
+    }
+
+    /* ================================================================
+       Toggle
+       ================================================================ */
+    .lumin-toggle {
+      position: relative;
+      display: inline-block;
+      width: 40px;
+      height: 22px;
+      flex-shrink: 0;
+      cursor: pointer;
+    }
+
+    .lumin-toggle input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .lumin-toggle__slider {
+      position: absolute;
+      inset: 0;
+      background: var(--lumin-border-color);
+      border-radius: var(--lumin-radius-full);
+      transition: background var(--lumin-transition-normal);
+    }
+
+    .lumin-toggle__slider::before {
+      content: '';
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      left: 2px;
+      bottom: 2px;
+      background: oklch(100% 0 0);
+      border-radius: 50%;
+      transition: transform var(--lumin-transition-normal);
+      box-shadow: 0 1px 2px oklch(0% 0 0 / 0.2);
+    }
+
+    .lumin-toggle input:checked + .lumin-toggle__slider {
+      background: var(--lumin-accent);
+    }
+
+    .lumin-toggle input:checked + .lumin-toggle__slider::before {
+      transform: translateX(18px);
+    }
+
+    /* ================================================================
+       Badge
+       ================================================================ */
+    .lumin-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 2px 8px;
+      border-radius: var(--lumin-radius-full);
+      font-size: var(--lumin-text-xs);
+      font-weight: var(--lumin-font-medium);
+      line-height: 1.4;
+    }
+
+    .lumin-badge--primary { background: var(--lumin-primary-light); color: var(--lumin-primary); }
+    .lumin-badge--success { background: var(--lumin-success-light); color: var(--lumin-success); }
+    .lumin-badge--warning { background: var(--lumin-warning-light); color: var(--lumin-warning); }
+    .lumin-badge--error { background: var(--lumin-error-light); color: var(--lumin-error); }
+    .lumin-badge--info { background: var(--lumin-info-light); color: var(--lumin-info); }
+    .lumin-badge--gradient { background: linear-gradient(135deg, var(--lumin-primary), var(--lumin-primary-hover)); color: oklch(100% 0 0); }
+
+    /* ================================================================
+       Progress
+       ================================================================ */
+    .lumin-progress {
+      width: 100%;
+      height: 6px;
+      background: var(--lumin-bg-tertiary);
+      border-radius: var(--lumin-radius-full);
+      overflow: hidden;
+    }
+
+    .lumin-progress__bar {
+      height: 100%;
+      background: var(--lumin-primary);
+      border-radius: var(--lumin-radius-full);
+      transition: width var(--lumin-transition-normal);
+    }
+
+    .lumin-progress--striped .lumin-progress__bar {
+      background-image: linear-gradient(45deg, oklch(100% 0 0 / 0.15) 25%, transparent 25%, transparent 50%, oklch(100% 0 0 / 0.15) 50%, oklch(100% 0 0 / 0.15) 75%, transparent 75%);
+      background-size: 20px 20px;
+      animation: progress-stripes 1s linear infinite;
+    }
+
+    @keyframes progress-stripes {
+      0% { background-position: 0 0; }
+      100% { background-position: 40px 0; }
+    }
+
+    /* ================================================================
+       Skeleton
+       ================================================================ */
+    .lumin-skeleton {
+      background: var(--lumin-bg-tertiary);
+      border-radius: var(--lumin-radius-sm);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .lumin-skeleton::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, transparent 0%, oklch(100% 0 0 / 0.04) 50%, transparent 100%);
+      animation: shimmer 1.5s infinite;
+    }
+
+    @keyframes shimmer {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+
+    .lumin-skeleton--text { height: 14px; width: 100%; }
+    .lumin-skeleton--circle { width: 40px; height: 40px; border-radius: 50%; }
+    .lumin-skeleton--rectangle { height: 120px; width: 100%; }
+
+    /* ================================================================
+       Toast
+       ================================================================ */
+    .lumin-toast {
+      display: flex;
+      align-items: center;
+      gap: var(--lumin-space-md);
+      padding: var(--lumin-space-md) var(--lumin-space-lg);
+      background: var(--lumin-bg-elevated);
+      border-radius: var(--lumin-radius-md);
+      box-shadow: var(--lumin-shadow-lg);
+      min-width: 300px;
+      max-width: 450px;
+    }
+
+    .lumin-toast--success { border-left: 3px solid var(--lumin-success); }
+    .lumin-toast--warning { border-left: 3px solid var(--lumin-warning); }
+    .lumin-toast--error { border-left: 3px solid var(--lumin-error); }
+    .lumin-toast--info { border-left: 3px solid var(--lumin-info); }
+
+    .lumin-toast__title { font-weight: var(--lumin-font-medium); }
+    .lumin-toast__message { font-size: var(--lumin-text-sm); color: var(--lumin-text-secondary); }
+
+    /* ================================================================
+       Colors Preview
+       ================================================================ */
+    .color-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: var(--lumin-space-md);
+    }
+
+    .color-swatch {
+      height: 80px;
+      border-radius: var(--lumin-radius-md);
+      display: flex;
+      align-items: flex-end;
+      padding: var(--lumin-space-sm);
+      font-size: var(--lumin-text-xs);
+      font-family: var(--lumin-font-mono);
+    }
+
+    /* ================================================================
+       Animations Preview
+       ================================================================ */
+    .animation-box {
+      width: 60px;
+      height: 60px;
+      background: var(--lumin-primary);
+      border-radius: var(--lumin-radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: oklch(100% 0 0);
+      font-size: var(--lumin-text-xs);
+    }
+
+    @keyframes preview-fade { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes preview-slide { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes preview-scale { from { opacity: 0; transform: scale(0.96); } to { opacity: 1; transform: scale(1); } }
+    @keyframes preview-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    @keyframes preview-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+    @keyframes preview-bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+
+    .anim-fade { animation: preview-fade 1s var(--lumin-ease-out-quart) infinite alternate; }
+    .anim-slide { animation: preview-slide 1s var(--lumin-ease-out-quart) infinite alternate; }
+    .anim-scale { animation: preview-scale 1s var(--lumin-ease-out-quart) infinite alternate; }
+    .anim-spin { animation: preview-spin 2s linear infinite; }
+    .anim-pulse { animation: preview-pulse 2s ease-in-out infinite; }
+    .anim-bounce { animation: preview-bounce 1s ease-in-out infinite; }
+  </style>
 </head>
 <body>
-  <div id="app"></div>
-  <script type="module" src="/src/main.ts"></script>
+  <!-- 主题切换 -->
+  <div class="theme-toggle">
+    <button class="lumin-btn" onclick="toggleTheme()">切换主题</button>
+  </div>
+
+  <div class="preview-container">
+    <!-- Header -->
+    <header class="preview-header">
+      <h1>Lumin UI/UX</h1>
+      <p>现代、精致、沉浸式的视觉设计系统</p>
+    </header>
+
+    <!-- 色彩系统 -->
+    <section class="preview-section">
+      <h2>色彩系统 (OKLCH)</h2>
+      <div class="color-grid">
+        <div class="color-swatch" style="background: var(--lumin-primary);">Primary</div>
+        <div class="color-swatch" style="background: var(--lumin-success);">Success</div>
+        <div class="color-swatch" style="background: var(--lumin-warning);">Warning</div>
+        <div class="color-swatch" style="background: var(--lumin-error);">Error</div>
+        <div class="color-swatch" style="background: var(--lumin-info);">Info</div>
+        <div class="color-swatch" style="background: var(--lumin-bg-primary); border: 1px solid var(--lumin-border-color);">BG Primary</div>
+        <div class="color-swatch" style="background: var(--lumin-bg-secondary);">BG Secondary</div>
+        <div class="color-swatch" style="background: var(--lumin-bg-tertiary);">BG Tertiary</div>
+        <div class="color-swatch" style="background: var(--lumin-bg-elevated);">BG Elevated</div>
+      </div>
+    </section>
+
+    <!-- 按钮 -->
+    <section class="preview-section">
+      <h2>按钮 (Button)</h2>
+      <div class="preview-row">
+        <button class="lumin-btn">默认按钮</button>
+        <button class="lumin-btn lumin-btn--primary">主要按钮</button>
+        <button class="lumin-btn lumin-btn--secondary">次要按钮</button>
+        <button class="lumin-btn lumin-btn--destructive">危险按钮</button>
+      </div>
+      <div class="preview-row">
+        <button class="lumin-btn lumin-btn--sm">小按钮</button>
+        <button class="lumin-btn">默认按钮</button>
+        <button class="lumin-btn lumin-btn--lg">大按钮</button>
+        <button class="lumin-btn" disabled>禁用按钮</button>
+      </div>
+    </section>
+
+    <!-- 卡片 -->
+    <section class="preview-section">
+      <h2>卡片 (Card) — Double-Bezel</h2>
+      <div class="preview-grid">
+        <div class="lumin-card">
+          <h3>标准卡片</h3>
+          <p>使用 Double-Bezel 架构，外层边框壳 + 内核，营造精致的嵌套层次感。</p>
+        </div>
+        <div class="lumin-card lumin-card--subtle">
+          <h3>轻量卡片</h3>
+          <p>更轻量的变体，适合次要内容展示。</p>
+        </div>
+        <div class="lumin-card">
+          <h3>玻璃态效果</h3>
+          <p>配合 backdrop-filter 创建毛玻璃效果，半透明背景色。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 输入框 -->
+    <section class="preview-section">
+      <h2>输入框 (Input)</h2>
+      <div class="preview-row" style="max-width: 400px;">
+        <input class="lumin-input" placeholder="请输入内容..." />
+      </div>
+    </section>
+
+    <!-- 开关 -->
+    <section class="preview-section">
+      <h2>开关 (Toggle)</h2>
+      <div class="preview-row">
+        <label class="lumin-toggle">
+          <input type="checkbox" />
+          <span class="lumin-toggle__slider"></span>
+        </label>
+        <label class="lumin-toggle">
+          <input type="checkbox" checked />
+          <span class="lumin-toggle__slider"></span>
+        </label>
+      </div>
+    </section>
+
+    <!-- 徽章 -->
+    <section class="preview-section">
+      <h2>徽章 (Badge)</h2>
+      <div class="preview-row">
+        <span class="lumin-badge lumin-badge--primary">Primary</span>
+        <span class="lumin-badge lumin-badge--success">Success</span>
+        <span class="lumin-badge lumin-badge--warning">Warning</span>
+        <span class="lumin-badge lumin-badge--error">Error</span>
+        <span class="lumin-badge lumin-badge--info">Info</span>
+        <span class="lumin-badge lumin-badge--gradient">Gradient</span>
+      </div>
+    </section>
+
+    <!-- 进度条 -->
+    <section class="preview-section">
+      <h2>进度条 (Progress)</h2>
+      <div style="display: flex; flex-direction: column; gap: var(--lumin-space-md); max-width: 400px;">
+        <div class="lumin-progress">
+          <div class="lumin-progress__bar" style="width: 45%;"></div>
+        </div>
+        <div class="lumin-progress lumin-progress--striped">
+          <div class="lumin-progress__bar" style="width: 65%;"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 骨架屏 -->
+    <section class="preview-section">
+      <h2>骨架屏 (Skeleton)</h2>
+      <div style="max-width: 400px;">
+        <div class="lumin-skeleton lumin-skeleton--text" style="margin-bottom: var(--lumin-space-md);"></div>
+        <div class="lumin-skeleton lumin-skeleton--text" style="width: 80%; margin-bottom: var(--lumin-space-md);"></div>
+        <div class="lumin-skeleton lumin-skeleton--rectangle"></div>
+      </div>
+    </section>
+
+    <!-- Toast -->
+    <section class="preview-section">
+      <h2>轻提示 (Toast)</h2>
+      <div style="display: flex; flex-direction: column; gap: var(--lumin-space-md);">
+        <div class="lumin-toast lumin-toast--success">
+          <div>
+            <div class="lumin-toast__title">操作成功</div>
+            <div class="lumin-toast__message">数据已保存</div>
+          </div>
+        </div>
+        <div class="lumin-toast lumin-toast--error">
+          <div>
+            <div class="lumin-toast__title">操作失败</div>
+            <div class="lumin-toast__message">请检查网络连接</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 动画 -->
+    <section class="preview-section">
+      <h2>动画 (Animations)</h2>
+      <div class="preview-row">
+        <div style="text-align: center;">
+          <div class="animation-box anim-fade">Fade</div>
+        </div>
+        <div style="text-align: center;">
+          <div class="animation-box anim-slide">Slide</div>
+        </div>
+        <div style="text-align: center;">
+          <div class="animation-box anim-scale">Scale</div>
+        </div>
+        <div style="text-align: center;">
+          <div class="animation-box anim-spin">Spin</div>
+        </div>
+        <div style="text-align: center;">
+          <div class="animation-box anim-pulse">Pulse</div>
+        </div>
+        <div style="text-align: center;">
+          <div class="animation-box anim-bounce">Bounce</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 设计模式 -->
+    <section class="preview-section">
+      <h2>设计模式</h2>
+      <div class="preview-grid">
+        <div class="lumin-card" style="cursor: pointer;" onmouseover="this.style.transform='translateY(-1px)'" onmouseout="this.style.transform='translateY(0)'" onclick="this.style.transform='scale(0.98)'; setTimeout(() => this.style.transform='', 150)">
+          <h3>Magnetic Hover</h3>
+          <p>悬浮时微妙抬升，按下时回弹，创造物理交互感。点击这个卡片试试。</p>
+        </div>
+        <div class="lumin-card">
+          <h3>Button-in-Button</h3>
+          <p>主按钮内部使用高光渐变，模拟玻璃质感。</p>
+          <div style="margin-top: var(--lumin-space-md);">
+            <button class="lumin-btn lumin-btn--primary">查看效果</button>
+          </div>
+        </div>
+        <div class="lumin-card">
+          <h3>Double-Bezel</h3>
+          <p>卡片使用 ::before 伪元素创建外层边框壳，营造精致的嵌套层次感。</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    function toggleTheme() {
+      const html = document.documentElement;
+      const current = html.getAttribute('data-theme');
+      html.setAttribute('data-theme', current === 'dark' ? 'light' : 'dark');
+    }
+  </script>
 </body>
 </html>
