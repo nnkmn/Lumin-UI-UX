@@ -214,7 +214,7 @@
 
     .theme-toggle-btn:hover {
       background: var(--lumin-bg-tertiary);
-      border-color: var(--lumin-border-color-light);
+      border-color: var(--lumin-primary);
       transform: translateY(-1px);
     }
 
@@ -254,6 +254,7 @@
       background: var(--lumin-bg-tertiary);
       color: var(--lumin-text-primary);
       transform: translateY(-1px);
+      border-color: var(--lumin-primary);
     }
 
     /* 页脚 */
@@ -631,6 +632,19 @@
       padding: var(--lumin-space-sm);
       font-size: var(--lumin-text-xs);
       font-family: var(--lumin-font-mono);
+      border: 1px solid var(--lumin-border-color-light);
+    }
+
+    .color-swatch span {
+      background: oklch(0% 0 0 / 0.6);
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: oklch(100% 0 0);
+    }
+
+    [data-theme='light'] .color-swatch span {
+      background: oklch(100% 0 0 / 0.8);
+      color: oklch(20% 0.002 252);
     }
 
     /* ================================================================
@@ -694,15 +708,15 @@
     <section class="preview-section" id="colors">
       <h2>色彩系统 (OKLCH)</h2>
       <div class="color-grid">
-        <div class="color-swatch" style="background: var(--lumin-primary);"><span style="background: oklch(0% 0 0 / 0.5); padding: 2px 6px; border-radius: 4px;">Primary</span></div>
-        <div class="color-swatch" style="background: var(--lumin-success);"><span style="background: oklch(0% 0 0 / 0.5); padding: 2px 6px; border-radius: 4px;">Success</span></div>
-        <div class="color-swatch" style="background: var(--lumin-warning);"><span style="background: oklch(0% 0 0 / 0.5); padding: 2px 6px; border-radius: 4px;">Warning</span></div>
-        <div class="color-swatch" style="background: var(--lumin-error);"><span style="background: oklch(0% 0 0 / 0.5); padding: 2px 6px; border-radius: 4px;">Error</span></div>
-        <div class="color-swatch" style="background: var(--lumin-info);"><span style="background: oklch(0% 0 0 / 0.5); padding: 2px 6px; border-radius: 4px;">Info</span></div>
-        <div class="color-swatch" style="background: var(--lumin-bg-primary); border: 1px solid var(--lumin-border-color);"><span style="background: oklch(0% 0 0 / 0.5); padding: 2px 6px; border-radius: 4px;">BG Primary</span></div>
-        <div class="color-swatch" style="background: var(--lumin-bg-secondary);"><span style="background: oklch(0% 0 0 / 0.5); padding: 2px 6px; border-radius: 4px;">BG Secondary</span></div>
-        <div class="color-swatch" style="background: var(--lumin-bg-tertiary);"><span style="background: oklch(0% 0 0 / 0.5); padding: 2px 6px; border-radius: 4px;">BG Tertiary</span></div>
-        <div class="color-swatch" style="background: var(--lumin-bg-elevated);"><span style="background: oklch(0% 0 0 / 0.5); padding: 2px 6px; border-radius: 4px;">BG Elevated</span></div>
+        <div class="color-swatch" style="background: var(--lumin-primary);"><span>Primary</span></div>
+        <div class="color-swatch" style="background: var(--lumin-success);"><span>Success</span></div>
+        <div class="color-swatch" style="background: var(--lumin-warning);"><span>Warning</span></div>
+        <div class="color-swatch" style="background: var(--lumin-error);"><span>Error</span></div>
+        <div class="color-swatch" style="background: var(--lumin-info);"><span>Info</span></div>
+        <div class="color-swatch" style="background: var(--lumin-bg-primary);"><span>BG Primary</span></div>
+        <div class="color-swatch" style="background: var(--lumin-bg-secondary);"><span>BG Secondary</span></div>
+        <div class="color-swatch" style="background: var(--lumin-bg-tertiary);"><span>BG Tertiary</span></div>
+        <div class="color-swatch" style="background: var(--lumin-bg-elevated);"><span>BG Elevated</span></div>
       </div>
     </section>
 
