@@ -1,0 +1,183 @@
+/**
+ * Lumin Design Tokens
+ *
+ * 设计系统: Lumin
+ * 主风格: 玻璃态 + 微色调中性色
+ * 设计原则: 克制、深度、沉浸
+ *
+ * 规则来源:
+ *   - Impeccable 7 域参考
+ *   - High-End Visual Design (Double-Bezel / Button-in-Button / Magnetic Hover)
+ */
+
+/* ================================================================
+   暗色主题（默认）
+   ================================================================ */
+[data-theme='dark'] {
+  /** 背景色阶 — 中性色含微量 chroma 朝向品牌蓝 (hue: 252) */
+  --lumin-bg-primary: oklch(12% 0.006 252);
+  --lumin-bg-secondary: oklch(15.5% 0.007 252);
+  --lumin-bg-tertiary: oklch(18.5% 0.007 252);
+  --lumin-bg-elevated: oklch(21% 0.007 252);
+  --lumin-bg-input: oklch(17% 0.006 252);
+  --lumin-bg-overlay: oklch(8% 0.005 252 / 0.85);
+  --lumin-bg-hover: oklch(100% 0 0 / 0.05);
+  --lumin-bg-active: oklch(100% 0 0 / 0.08);
+
+  /** 文字色阶 */
+  --lumin-text: oklch(96% 0.002 252);
+  --lumin-text-primary: oklch(96% 0.002 252);
+  --lumin-text-secondary: oklch(72% 0.003 252);
+  --lumin-text-tertiary: oklch(54% 0.002 252);
+  --lumin-text-muted: oklch(40% 0.002 252);
+
+  /** 边框色阶 — hairline 风格 */
+  --lumin-border-color: oklch(100% 0 0 / 0.08);
+  --lumin-border-color-light: oklch(100% 0 0 / 0.05);
+  --lumin-border-strong: oklch(100% 0 0 / 0.12);
+
+  /** 主色 — Sky Blue (oklch hue: 252) */
+  --lumin-primary: oklch(65% 0.19 252);
+  --lumin-primary-hover: oklch(70% 0.17 252);
+  --lumin-primary-light: oklch(65% 0.19 252 / 0.12);
+  --lumin-gradient-primary: linear-gradient(135deg, oklch(65% 0.19 252), oklch(72% 0.15 252));
+
+  /** 状态色 */
+  --lumin-success: oklch(68% 0.19 142);
+  --lumin-success-light: oklch(68% 0.19 142 / 0.15);
+  --lumin-warning: oklch(72% 0.17 75);
+  --lumin-warning-light: oklch(72% 0.17 75 / 0.15);
+  --lumin-error: oklch(58% 0.24 27);
+  --lumin-error-light: oklch(58% 0.24 27 / 0.15);
+  --lumin-info: oklch(65% 0.19 252);
+  --lumin-info-light: oklch(65% 0.19 252 / 0.15);
+
+  /** 阴影 — 柔和环境阴影系列 */
+  --lumin-shadow-sm: 0 1px 3px oklch(0% 0 0 / 0.3);
+  --lumin-shadow-md: 0 4px 12px oklch(0% 0 0 / 0.35);
+  --lumin-shadow-lg: 0 8px 32px oklch(0% 0 0 / 0.4);
+  --lumin-shadow-xl: 0 12px 48px oklch(0% 0 0 / 0.5);
+  --lumin-shadow-glow-primary: 0 0 20px oklch(65% 0.19 252 / 0.15);
+
+  /** 组件专用变量 */
+  --lumin-titlebar-bg: oklch(9% 0.005 252 / 0.85);
+  --lumin-card-bg: var(--lumin-bg-secondary);
+  --lumin-card-border: var(--lumin-border-color);
+  --lumin-input-bg: var(--lumin-bg-input);
+  --lumin-input-border: var(--lumin-border-color);
+  --lumin-input-focus-border: var(--lumin-primary);
+  --lumin-input-focus-shadow: 0 0 0 3px var(--lumin-primary-light);
+  --lumin-tab-active-color: var(--lumin-primary);
+  --lumin-tab-active-border: var(--lumin-primary);
+  --lumin-nav-active-color: var(--lumin-primary);
+  --lumin-nav-active-indicator: var(--lumin-primary);
+  --lumin-progress-bg: var(--lumin-primary);
+
+  /** 玻璃态背景 */
+  --lumin-glass-sidebar: oklch(14% 0.006 252 / 0.78);
+  --lumin-glass-content: oklch(15% 0.006 252 / 0.72);
+  --lumin-glass-raised: oklch(21% 0.007 252 / 0.85);
+  --lumin-glass-input: oklch(21% 0.007 252 / 0.72);
+  --lumin-brand-color: oklch(96% 0.002 252);
+  --lumin-hover-overlay: oklch(100% 0 0 / 0.06);
+
+  /** 强调色 */
+  --lumin-accent: var(--lumin-primary);
+  --lumin-accent-hover: var(--lumin-primary-hover);
+  --lumin-accent-soft: var(--lumin-primary-light);
+
+  /** 扩展色阶 */
+  --lumin-text-inverse: oklch(100% 0 0);
+  --lumin-text-error: var(--lumin-error);
+  --lumin-text-success: var(--lumin-success);
+  --lumin-text-warning: var(--lumin-warning);
+  --lumin-success-bg: var(--lumin-success-light);
+  --lumin-warning-bg: var(--lumin-warning-light);
+  --lumin-error-bg: var(--lumin-error-light);
+  --lumin-info-bg: var(--lumin-info-light);
+  --lumin-bg-raised: var(--lumin-bg-elevated);
+  --lumin-border: var(--lumin-border-color);
+  --lumin-border-color-focus: var(--lumin-accent);
+  --lumin-gradient-success: linear-gradient(135deg, oklch(68% 0.19 142), oklch(66% 0.18 142));
+  --lumin-scrollbar-track: transparent;
+  --lumin-scrollbar-thumb: oklch(100% 0 0 / 0.1);
+  --lumin-scrollbar-thumb-hover: oklch(100% 0 0 / 0.2);
+}
+
+/* ================================================================
+   全局令牌（主题无关）
+   ================================================================ */
+:root {
+  /** 间距系统 — 4px 基准 */
+  --lumin-space-xs: 4px;
+  --lumin-space-sm: 8px;
+  --lumin-space-md: 12px;
+  --lumin-space-lg: 16px;
+  --lumin-space-xl: 24px;
+  --lumin-space-2xl: 32px;
+  --lumin-space-3xl: 48px;
+
+  /** 圆角系统 — squircle 偏好 */
+  --lumin-radius-xs: 4px;
+  --lumin-radius-sm: 6px;
+  --lumin-radius-md: 10px;
+  --lumin-radius-lg: 16px;
+  --lumin-radius-xl: 20px;
+  --lumin-radius-2xl: 28px;
+  --lumin-radius-full: 9999px;
+
+  /**
+   * 动效系统 — quart-out 系列
+   *
+   * 入场: ease-out（减速停止）
+   * 离场: ease-in（加速消失）
+   * 切换: ease-in-out（平滑往返）
+   * 禁止: linear / ease / bounce / elastic
+   */
+  --lumin-ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --lumin-ease-in-quart: cubic-bezier(0.7, 0, 0.84, 0);
+  --lumin-ease-in-out-quart: cubic-bezier(0.65, 0, 0.35, 1);
+
+  --lumin-transition-fast: 120ms var(--lumin-ease-out-quart);
+  --lumin-transition-normal: 250ms var(--lumin-ease-out-quart);
+  --lumin-transition-slow: 400ms var(--lumin-ease-out-quart);
+
+  /** Z-index 层级系统 */
+  --lumin-z-base: 0;
+  --lumin-z-raised: 1;
+  --lumin-z-above: 2;
+  --lumin-z-titlebar: 10;
+  --lumin-z-float: 50;
+  --lumin-z-dropdown: 1000;
+  --lumin-z-sticky: 9000;
+  --lumin-z-overlay: 9999;
+  --lumin-z-toast: 10000;
+  --lumin-z-notification: 10001;
+  --lumin-z-modal: 10002;
+  --lumin-z-confirm: 10003;
+  --lumin-z-max: 99999;
+
+  /** 强调色 */
+  --lumin-accent: oklch(65% 0.19 252);
+  --lumin-accent-hover: oklch(70% 0.17 252);
+  --lumin-accent-soft: oklch(65% 0.19 252 / 0.1);
+
+  /** 字体栈 — 系统原生 */
+  --lumin-font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  --lumin-font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  /** 字号系统 */
+  --lumin-text-xs: 11px;
+  --lumin-text-sm: 12px;
+  --lumin-text-base: 13px;
+  --lumin-text-lg: 15px;
+  --lumin-text-xl: 17px;
+  --lumin-text-2xl: 20px;
+  --lumin-text-3xl: 24px;
+
+  /** 字重系统 */
+  --lumin-font-normal: 400;
+  --lumin-font-medium: 500;
+  --lumin-font-semibold: 600;
+  --lumin-font-bold: 700;
+}

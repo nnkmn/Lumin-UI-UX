@@ -1,0 +1,97 @@
+/**
+ * Lumin 亮色主题
+ *
+ * 背景: 暖白近白色阶，微量 chroma 朝向品牌蓝 (hue: 252)
+ * 玻璃态: 半透明背景 + backdrop-blur
+ * 文字: 深色暖灰，保证 WCAG AA 对比度
+ */
+[data-theme='light'] {
+  /** 背景色阶 — 暖白中性色 (chroma: 0.002-0.004) */
+  --lumin-bg-primary: oklch(99% 0.002 252);
+  --lumin-bg-secondary: oklch(96.5% 0.003 252);
+  --lumin-bg-tertiary: oklch(94% 0.004 252);
+  --lumin-bg-elevated: oklch(100% 0 0);
+  --lumin-bg-input: oklch(100% 0 0);
+  --lumin-bg-overlay: oklch(0% 0 0 / 0.45);
+  --lumin-bg-hover: oklch(0% 0 0 / 0.04);
+  --lumin-bg-active: oklch(0% 0 0 / 0.08);
+
+  /** 文字色阶 — 暖灰黑 */
+  --lumin-text: oklch(22% 0.002 252);
+  --lumin-text-primary: oklch(20% 0.002 252);
+  --lumin-text-secondary: oklch(38% 0.002 252);
+  --lumin-text-tertiary: oklch(52% 0.001 252);
+  --lumin-text-muted: oklch(62% 0.001 252);
+
+  /** 边框色阶 — hairline 浅色 */
+  --lumin-border-color: oklch(0% 0 0 / 0.08);
+  --lumin-border-color-light: oklch(0% 0 0 / 0.05);
+  --lumin-border-strong: oklch(0% 0 0 / 0.13);
+
+  /** 主色 — 深蓝 (需更高对比度以适配白底) */
+  --lumin-primary: oklch(52% 0.21 252);
+  --lumin-primary-hover: oklch(56% 0.19 252);
+  --lumin-primary-light: oklch(52% 0.21 252 / 0.1);
+  --lumin-gradient-primary: linear-gradient(135deg, oklch(52% 0.21 252), oklch(58% 0.17 252));
+
+  /** 状态色 */
+  --lumin-success: oklch(55% 0.19 142);
+  --lumin-success-light: oklch(55% 0.19 142 / 0.12);
+  --lumin-warning: oklch(58% 0.17 75);
+  --lumin-warning-light: oklch(58% 0.17 75 / 0.12);
+  --lumin-error: oklch(48% 0.24 27);
+  --lumin-error-light: oklch(48% 0.24 27 / 0.12);
+  --lumin-info: oklch(52% 0.21 252);
+  --lumin-info-light: oklch(52% 0.21 252 / 0.1);
+
+  /** 阴影 — 柔和的暖灰环境阴影 */
+  --lumin-shadow-sm: 0 1px 3px oklch(0% 0 0 / 0.06);
+  --lumin-shadow-md: 0 4px 12px oklch(0% 0 0 / 0.08);
+  --lumin-shadow-lg: 0 8px 32px oklch(0% 0 0 / 0.1);
+  --lumin-shadow-xl: 0 12px 48px oklch(0% 0 0 / 0.12);
+  --lumin-shadow-glow-primary: 0 0 20px oklch(52% 0.21 252 / 0.1);
+
+  /** 组件专用变量 */
+  --lumin-titlebar-bg: oklch(98% 0.002 252 / 0.85);
+  --lumin-card-bg: var(--lumin-bg-secondary);
+  --lumin-card-border: var(--lumin-border-color);
+  --lumin-input-bg: var(--lumin-bg-input);
+  --lumin-input-border: var(--lumin-border-color);
+  --lumin-input-focus-border: var(--lumin-primary);
+  --lumin-input-focus-shadow: 0 0 0 3px var(--lumin-primary-light);
+  --lumin-tab-active-color: var(--lumin-primary);
+  --lumin-tab-active-border: var(--lumin-primary);
+  --lumin-nav-active-color: var(--lumin-primary);
+  --lumin-nav-active-indicator: var(--lumin-primary);
+  --lumin-progress-bg: var(--lumin-primary);
+
+  /** 玻璃态背景 — 亮色半透明 */
+  --lumin-glass-sidebar: oklch(100% 0 0 / 0.78);
+  --lumin-glass-content: oklch(100% 0 0 / 0.72);
+  --lumin-glass-raised: oklch(100% 0 0 / 0.88);
+  --lumin-glass-input: oklch(100% 0 0 / 0.9);
+  --lumin-brand-color: oklch(20% 0.002 252);
+  --lumin-hover-overlay: oklch(0% 0 0 / 0.04);
+
+  /** 强调色 */
+  --lumin-accent: oklch(52% 0.21 252);
+  --lumin-accent-hover: oklch(56% 0.19 252);
+  --lumin-accent-soft: oklch(52% 0.21 252 / 0.1);
+
+  /** 扩展色阶 */
+  --lumin-text-inverse: oklch(100% 0 0);
+  --lumin-text-error: var(--lumin-error);
+  --lumin-text-success: var(--lumin-success);
+  --lumin-text-warning: var(--lumin-warning);
+  --lumin-success-bg: var(--lumin-success-light);
+  --lumin-warning-bg: var(--lumin-warning-light);
+  --lumin-error-bg: var(--lumin-error-light);
+  --lumin-info-bg: var(--lumin-info-light);
+  --lumin-bg-raised: var(--lumin-bg-elevated);
+  --lumin-border: var(--lumin-border-color);
+  --lumin-border-color-focus: var(--lumin-accent);
+  --lumin-gradient-success: linear-gradient(135deg, oklch(55% 0.19 142), oklch(52% 0.18 142));
+  --lumin-scrollbar-track: transparent;
+  --lumin-scrollbar-thumb: oklch(0% 0 0 / 0.15);
+  --lumin-scrollbar-thumb-hover: oklch(0% 0 0 / 0.25);
+}

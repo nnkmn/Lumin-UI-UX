@@ -1,260 +1,226 @@
-# Pixel UI Kit
+# Lumin UI/UX
 
-> 像素风格 UI/UX 组件库 + Icon 图标库 | 三版本并行 | 纯 CSS 零依赖
+> 现代、精致、沉浸式的视觉设计系统 | 玻璃态 + 微色调中性色 | 纯 CSS 零依赖
 
 ---
 
-## 版本一览
+## 从 Pixel UI 重构而来
 
-| 版本 | 目录 | 前缀 | 风格 | 适合场景 |
-|------|------|------|------|----------|
-| **渐变色版** | `gradient/` | `--pg-` / `.pg-` | 像素+渐变融合，柔和圆角，发光阴影 | 营销页、Dashboard、展示型项目 |
-| **极简风版** | `minimal/` | `--pm-` / `.pm-` | 硬像素风，方正边框，方块阴影，0 圆角 | 工具应用、管理后台、复古游戏风 |
-| **自定义版** | `custom/` | `--pc-` / `.pc-` | 全 CSS 变量驱动，颜色随意定制 | 品牌定制、多主题切换 |
+本项目是对 [Pixel UI](https://github.com/nnkmn/Pixel-UI) 的完全重构。
+
+### 变更说明
+
+| 项目 | Pixel UI | Lumin UI/UX |
+|------|----------|-------------|
+| **设计风格** | 像素风 (Pixel Art) | 玻璃态 (Glass Morphism) |
+| **色彩系统** | RGB/HEX | OKLCH 色彩空间 |
+| **圆角系统** | 0px 或极小值 | squircle 偏好 (4px ~ 28px) |
+| **阴影系统** | 硬阴影 (无 blur) | 柔和环境阴影 |
+| **动效系统** | step-end 复古动画 | Quart-out 物理缓动 |
+| **字体系统** | 像素字体 (Press Start 2P) | 系统原生字体栈 |
+| **组件前缀** | `pg-` / `pm-` / `pc-` | `lumin-` |
+| **主题系统** | 简单暗色模式 | dark/light/auto + 8 个预设 |
+
+### 重构目标
+
+- **从像素风转向现代设计** - 去掉像素风格，采用更精致、专业的视觉语言
+- **引入设计系统思维** - 建立完整的设计令牌体系，支持主题定制和扩展
+- **提升交互体验** - 引入 Double-Bezel、Button-in-Button、Magnetic Hover 等高级设计模式
+- **增强无障碍支持** - 支持 `prefers-reduced-motion`、高对比度模式、ARIA 角色
+- **框架无关** - 纯 CSS 实现，可适配任何前端框架
+
+---
+
+## 设计理念
+
+**Lumin** 是一种现代、精致、沉浸式的视觉设计语言，专为桌面应用设计。
+
+### 设计哲学
+
+- **克制** (Restrained) - 避免过度装饰，保持界面简洁
+- **深度** (Depth) - 通过层次和阴影创造空间感
+- **沉浸** (Immersive) - 让用户专注于内容而非界面
+
+### 三大设计模式
+
+| 模式 | 说明 |
+|------|------|
+| **Double-Bezel** | 卡片使用 `::before` 伪元素创建外层边框壳，营造精致的嵌套层次感 |
+| **Button-in-Button** | 主按钮内部使用 `::before` 伪元素创建顶部高光渐变，模拟玻璃质感 |
+| **Magnetic Hover** | 导航项和按钮在 hover 时产生微妙抬升，按下时回弹，创造物理交互感 |
+
+---
+
+## 核心特性
+
+- **OKLCH 色彩空间** - 更均匀的感知亮度和更好的色彩过渡
+- **CSS 变量驱动** - 改几个变量换整套皮肤
+- **亮/暗主题切换** - `data-theme="dark"` 一行搞定
+- **Quart-out 物理缓动** - 自然的减速停止感
+- **Glass Morphism** - 毛玻璃效果，配合半透明背景色
+- **4px 间距系统** - 7 级间距，从 4px 到 48px
+- **squircle 圆角** - 8 级圆角，从 4px 到 9999px
+- **15 种关键帧动画** - 淡入、滑入、缩放、脉冲、抖动等
+- **无障碍支持** - `prefers-reduced-motion`、高对比度模式、ARIA 角色
 
 ---
 
 ## 快速开始
 
-每个版本用法一样：引入图标 sprite + 引入样式表 + 使用组件。
-
-### 渐变色版 (gradient)
-
 ```html
-<!-- 1. 引入图标 Sprite（内联到 HTML） -->
-<svg xmlns="http://www.w3.org/2000/svg" style="display:none">
-  <symbol id="pg-icon-home" viewBox="0 0 24 24"><path fill="currentColor" d="M12 3L2 12h3v8h6v-6h2v6h6v-8h3L12 3z"/></symbol>
-  <!-- ... 更多图标 ... -->
-</svg>
+<!-- 1. 引入样式 -->
+<link rel="stylesheet" href="src/styles/tokens.scss">
+<link rel="stylesheet" href="src/styles/global.scss">
+<link rel="stylesheet" href="src/styles/controls.scss">
+<link rel="stylesheet" href="src/styles/animations.scss">
+<link rel="stylesheet" href="src/styles/app.scss">
 
-<!-- 2. 引入样式 -->
-<link rel="stylesheet" href="gradient/pixel-gradient.css">
+<!-- 2. 设置主题 -->
+<html data-theme="dark">
 
 <!-- 3. 使用组件 -->
-<button class="pg-btn pg-btn-primary">按钮</button>
-<button class="pg-btn pg-btn-icon pg-btn-primary">
-  <svg class="pg-icon"><use href="#pg-icon-search"></use></svg>
-</button>
-
-<!-- 4. 暗色主题（可选） -->
-<body data-theme="dark">
+<button class="lumin-btn lumin-btn--primary">主要按钮</button>
+<div class="lumin-card">卡片内容</div>
+<input class="lumin-input" placeholder="输入..." />
 ```
-
-### 极简风版 (minimal)
-
-```html
-<link rel="stylesheet" href="minimal/pixel-minimal.css">
-
-<button class="pm-btn pm-btn-primary">硬像素按钮</button>
-<input class="pm-input" placeholder="输入..." />
-```
-
-### 自定义版 (custom)
-
-```html
-<link rel="stylesheet" href="custom/pixel-custom.css">
-
-<button class="pc-btn pc-btn-primary">可定制按钮</button>
-```
-
----
-
-## 特性（三版本通用）
-
-- **纯 CSS 实现** — 零 JS 依赖
-- **CSS 变量驱动** — 改几个变量换整套皮肤
-- **亮/暗主题切换** — `data-theme="dark"` 一行搞定
-- **Icon 最高层级** — z-index: 9999，永远不被遮挡
-- **8px 网格系统** — 间距遵循 8px 倍数
-- **WCAG AA 可访问性** — 焦点样式、语义化标签、减少动效支持
-- **60+ SVG 图标** — 内联 sprite，无需外部请求
 
 ---
 
 ## 文件结构
 
 ```
-pixel-ui-kit/
+Lumin-UI-UX/
+├── index.html                    # 入口 HTML
+├── src/
+│   ├── main.ts                   # 入口文件
+│   └── styles/
+│       ├── tokens.scss           # 设计令牌 (色彩/间距/圆角/动效/字体/Z-index)
+│       ├── global.scss           # 全局重置 (滚动条/焦点环/选区/无障碍)
+│       ├── controls.scss         # 组件库 (Card/Button/Input/Toggle/Badge/Progress/Skeleton/Select/Modal/Toast)
+│       ├── animations.scss       # 动画库 (15种关键帧 + 工具类 + 延迟 + GPU加速)
+│       ├── app.scss              # 布局 (Titlebar/Sidebar/Main/Bento Grid/响应式)
+│       └── themes/
+│           └── light.scss        # 亮色主题
+├── docs/
+│   ├── design-principles.md      # 设计原则
+│   ├── best-practices.md         # 最佳实践
+│   ├── components/
+│   │   └── index.md              # 组件文档
+│   ├── patterns/
+│   │   ├── layout.md             # 布局模式
+│   │   ├── motion.md             # 动效规范
+│   │   └── theme.md              # 主题系统
+│   └── reference/
+│       ├── tokens.md             # 设计令牌参考
+│       └── utilities.md          # CSS 工具类参考
 ├── .gitignore
 ├── LICENSE
-├── README.md                  ← 总文档（你在这里）
-│
-├── gradient/                  # ★ 渐变色版
-│   ├── pixel-gradient.css     #   主样式表
-│   ├── pixel-icons.svg        #   图标库（独立文件）
-│   ├── index.html             #   组件演示页 ← 点这个看效果
-│   └── README.md              #   子文档
-│
-├── minimal/                   # ★ 极简风版
-│   ├── pixel-minimal.css      #   主样式表
-│   ├── pixel-icons.svg        #   图标库
-│   ├── index.html             #   组件演示页
-│   └── README.md              #   子文档
-│
-└── custom/                    # ★ 自定义版
-    ├── pixel-custom.css       #   主样式表（全变量驱动）
-    ├── pixel-icons.svg        #   图标库
-    ├── index.html             #   演示页 + 颜色定制器
-    └── README.md              #   子文档
+└── README.md
 ```
 
 ---
 
-## 各版本详细说明
+## 设计令牌
 
----
-
-### 🎨 渐变色版 (Gradient) — `gradient/`
-
-**设计风格**
-
-像素风与渐变色融合。按钮带渐变背景和发光阴影，圆角柔和（6~24px），整体现代感强。
-
-**核心特点**
-- 渐变按钮（`--pg-gradient-primary`）
-- 发光阴影效果（`box-shadow` + 多层叠加）
-- 柔和圆角（`--pg-radius-sm: 4px` ~ `--pg-radius-xl: 24px`）
-- Inter 字体为主
-
-**CSS 变量示例**
+### 色彩系统 (OKLCH)
 
 ```css
-:root {
-  --pg-primary-500: #667eea;         /* 主色 */
-  --pg-secondary-500: #764ba2;       /* 辅助色 */
-  --pg-gradient-primary: linear-gradient(135deg, #667eea, #764ba2);  /* 渐变 */
-  --pg-radius-md: 12px;
-  --pg-font-sans: 'Inter', sans-serif;
-}
+/* 暗色主题 */
+--lumin-bg-primary: oklch(12% 0.006 252);
+--lumin-primary: oklch(65% 0.19 252);
+
+/* 亮色主题 */
+--lumin-bg-primary: oklch(99% 0.002 252);
+--lumin-primary: oklch(52% 0.21 252);
 ```
 
-**组件列表**
+### 间距系统 (4px 基准)
+
+```css
+--lumin-space-xs: 4px;
+--lumin-space-sm: 8px;
+--lumin-space-md: 12px;
+--lumin-space-lg: 16px;
+--lumin-space-xl: 24px;
+--lumin-space-2xl: 32px;
+--lumin-space-3xl: 48px;
+```
+
+### 圆角系统 (squircle 偏好)
+
+```css
+--lumin-radius-xs: 4px;
+--lumin-radius-sm: 6px;
+--lumin-radius-md: 10px;
+--lumin-radius-lg: 16px;
+--lumin-radius-xl: 20px;
+--lumin-radius-2xl: 28px;
+--lumin-radius-full: 9999px;
+```
+
+### 动效系统 (Quart-out)
+
+```css
+--lumin-ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+--lumin-transition-fast: 120ms;
+--lumin-transition-normal: 250ms;
+--lumin-transition-slow: 400ms;
+```
+
+---
+
+## 组件列表
 
 | 分类 | 组件 |
 |------|------|
-| 基础 | Button (Primary/Secondary/Ghost/Outline), Input, Textarea, Select |
-| 表单 | Checkbox, Radio, Switch |
-| 布局 | Card (普通/渐变边框), Avatar, Badge |
-| 反馈 | Alert (Info/Success/Warning/Error), Progress, Spinner/Dots/Skeleton |
-| 导航 | Navbar, Tabs (默认/Pill 胶囊), Breadcrumb, Pagination |
-| 数据 | Table |
-| 交互 | Dropdown, Tooltip, Modal |
-| 工具 | Divider, Empty State |
-
-**在线预览**: [https://nnkmn.github.io/Pixel-UI/gradient/index.html](https://nnkmn.github.io/Pixel-UI/gradient/index.html)
+| 基础 | Button (Primary/Secondary/Destructive/Icon), Input, Select |
+| 表单 | Toggle |
+| 布局 | Card (Standard/Subtle/Double), Card Grid |
+| 反馈 | Modal, Toast, Progress, Skeleton, Badge |
+| 导航 | Nav Icon, Nav Item, Nav Group |
 
 ---
 
-### 🔲 极简风版 (Minimal) — `minimal/`
+## 主题系统
 
-**设计风格**
+支持三种主题模式：
 
-硬核像素风。边框方正，阴影是偏移硬阴影（非模糊），圆角为 0 或极小，过渡动画用 `step-end` 模拟复古游戏感。
-
-**核心特点**
-- 圆角为零或接近零（`--pm-radius-sm: 0px`）
-- 方块硬阴影（`4px 4px 0 #000`，无 blur）
-- `transition-timing-function: step-end` 复古动画感
-- 默认使用等宽/像素字体
-
-```css
-:root {
-  --pm-primary-500: #4061ff;          /* 主色 */
-  --pm-border-color: #000;            /* 边框色 */
-  --pm-shadow-md: 4px 4px 0 #000;     /* 硬阴影 */
-  --pm-font-mono: 'Press Start 2P', monospace;
-}
-```
-
-**组件覆盖**
-
-全部组件与 gradient 版对应实现：
-Button, Input, Checkbox/Radio/Switch, Card, Avatar, Badge,
-Alert, Tabs, Navbar, Breadcrumb, Pagination, Progress,
-Spinner/Skeleton, Table, Dropdown, Tooltip, Modal, Divider, Empty State
-
-**在线预览**: [https://nnkmn.github.io/Pixel-UI/minimal/index.html](https://nnkmn.github.io/Pixel-UI/minimal/index.html)
-
----
-
-### 🎛️ 自定义版 (Custom) — `custom/`
-
-**设计风格**
-
-颜色完全通过 CSS 变量驱动。改几个值就能换整套皮肤，适合品牌定制和多主题场景。
-
-**核心特点**
-- 所有颜色都是顶层变量，一处修改全局生效
-- 每个组件有独立变量支持精细控制
-- 演示页自带**颜色选择器**，实时调色预览
-
-#### 快速换主色
-
-```css
-:root { --pc-primary: #ff6b35; }  /* 改一行就换色系 */
-```
-
-#### 换整套配色方案
-
-```css
-:root {
-  /* 功能色 */
-  --pc-success: #22c55e;
-  --pc-warning: #f59e0b;
-  --pc-error: #ef4444;
-  --pc-info: #0ea5e9;
-
-  /* 背景 & 文字 */
-  --pc-bg-primary: #ffffff;
-  --pc-bg-secondary: #f8fafc;
-  --pc-text-primary: #0f172a;
-
-  /* 圆角 & 阴影 */
-  --pc-radius-md: 12px;
-  --pc-shadow-glow: 0 4px 20px rgba(16,185,129,0.4);
-}
-```
-
-#### 组件级别变量
-
-```css
-/* 按钮 */      --pc-btn-primary-bg: var(--pc-primary);
-/* 输入框 */    --pc-input-focus-border: var(--pc-primary);
-/* 卡片 */      --pc-card-bg: var(--pc-bg-elevated);
-/* 进度条 */    --pc-progress-bg: var(--pc-primary);
-```
-
-**在线预览**: [https://nnkmn.github.io/Pixel-UI/custom/index.html](https://nnkmn.github.io/Pixel-UI/custom/index.html) （含颜色定制器）
-
----
-
-## 图标库
-
-三个版本共用同一套 60+ 图标，仅前缀不同：
+| 模式 | 说明 |
+|------|------|
+| `dark` | 暗色主题 (默认) |
+| `light` | 亮色主题 |
+| `auto` | 跟随系统偏好 |
 
 ```html
-<!-- gradient -->
-<svg class="pg-icon"><use href="#pg-icon-search"></use></svg>
-
-<!-- minimal -->
-<svg class="pm-icon"><use href="#pm-icon-search"></use></svg>
-
-<!-- custom -->
-<svg class="pc-icon"><use href="#pc-icon-search"></use></svg>
+<html data-theme="dark">
+<html data-theme="light">
+<html data-theme="auto">
 ```
 
-**可用图标**（60 个）：
+### 主题预设
 
-home, user, settings, search, menu, close, plus, check, info, warning, error, success,
-file, folder, download, upload, eye, lock, star, heart, message, bell, edit, trash,
-copy, refresh, save, share, phone, mail, calendar, clock, location, play, pause,
-bar-chart, line-chart, database, server, image,
-arrow-right/down/left/up, chevron-left/right/up/down, external-link, filter, logout,
-github, moon, sun, zoom-in/out, grid, list, inbox
+内置 8 个主题预设，基于品牌色色相动态生成：
 
-**所有图标 z-index 强制为 9999**，确保不被其他元素遮挡。
+| 预设 | 色相 | 说明 |
+|------|------|------|
+| indigo | 252 | 靛青 (默认) |
+| teal | 175 | 深青 |
+| coral | 15 | 珊瑚 |
+| amber | 75 | 琥珀 |
+| emerald | 142 | 翠绿 |
+| sky | 220 | 天蓝 |
+| violet | 280 | 紫罗兰 |
+| rose | 340 | 玫瑰 |
 
-尺寸：`.icon` (16×16)、`.icon-sm` (14×14)、`.icon-lg` (24×24)、`.icon-xl` (32×32)
+---
+
+## 无障碍支持
+
+- `:focus-visible` 全局 2px accent 色 outline + 2px offset
+- `@media (prefers-reduced-motion: reduce)` 全面禁用动画
+- ARIA 角色：`role="dialog"`, `role="status"`, `role="alertdialog"`
+- 高对比度模式支持
+- 减少透明度模式支持
 
 ---
 
