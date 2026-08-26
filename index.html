@@ -196,6 +196,97 @@
       z-index: 100;
     }
 
+    .theme-toggle-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      background: var(--lumin-bg-secondary);
+      border: 1px solid var(--lumin-border-color);
+      border-radius: var(--lumin-radius-full);
+      cursor: pointer;
+      transition: background var(--lumin-transition-fast),
+                  border-color var(--lumin-transition-fast),
+                  transform var(--lumin-transition-fast);
+      font-size: 18px;
+    }
+
+    .theme-toggle-btn:hover {
+      background: var(--lumin-bg-tertiary);
+      border-color: var(--lumin-border-color-light);
+      transform: translateY(-1px);
+    }
+
+    .theme-toggle-btn:active {
+      transform: translateY(0) scale(0.95);
+    }
+
+    /* 导航 */
+    .preview-nav {
+      position: fixed;
+      top: var(--lumin-space-lg);
+      left: var(--lumin-space-lg);
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      gap: var(--lumin-space-xs);
+    }
+
+    .preview-nav a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      background: var(--lumin-bg-secondary);
+      border: 1px solid var(--lumin-border-color);
+      border-radius: var(--lumin-radius-md);
+      color: var(--lumin-text-secondary);
+      text-decoration: none;
+      font-size: var(--lumin-text-xs);
+      transition: background var(--lumin-transition-fast),
+                  color var(--lumin-transition-fast),
+                  transform var(--lumin-transition-fast);
+    }
+
+    .preview-nav a:hover {
+      background: var(--lumin-bg-tertiary);
+      color: var(--lumin-text-primary);
+      transform: translateY(-1px);
+    }
+
+    /* 页脚 */
+    .preview-footer {
+      margin-top: var(--lumin-space-3xl);
+      padding: var(--lumin-space-xl) 0;
+      border-top: 1px solid var(--lumin-border-color-light);
+      text-align: center;
+    }
+
+    .preview-footer p {
+      color: var(--lumin-text-muted);
+      font-size: var(--lumin-text-sm);
+      margin-bottom: var(--lumin-space-sm);
+    }
+
+    .preview-footer a {
+      color: var(--lumin-accent);
+      text-decoration: none;
+      transition: color var(--lumin-transition-fast);
+    }
+
+    .preview-footer a:hover {
+      color: var(--lumin-accent-hover);
+    }
+
+    .preview-footer-links {
+      display: flex;
+      justify-content: center;
+      gap: var(--lumin-space-lg);
+      margin-top: var(--lumin-space-md);
+    }
+
     /* ================================================================
        Buttons
        ================================================================ */
@@ -573,9 +664,23 @@
   </style>
 </head>
 <body>
+  <!-- 导航 -->
+  <nav class="preview-nav">
+    <a href="#colors" title="色彩">C</a>
+    <a href="#buttons" title="按钮">B</a>
+    <a href="#cards" title="卡片">D</a>
+    <a href="#inputs" title="输入">I</a>
+    <a href="#badges" title="徽章">G</a>
+    <a href="#progress" title="进度">P</a>
+    <a href="#animations" title="动画">A</a>
+    <a href="#patterns" title="模式">M</a>
+  </nav>
+
   <!-- 主题切换 -->
   <div class="theme-toggle">
-    <button class="lumin-btn" onclick="toggleTheme()">切换主题</button>
+    <button class="theme-toggle-btn" onclick="toggleTheme()" title="切换主题">
+      <span id="theme-icon">☀️</span>
+    </button>
   </div>
 
   <div class="preview-container">
@@ -586,23 +691,23 @@
     </header>
 
     <!-- 色彩系统 -->
-    <section class="preview-section">
+    <section class="preview-section" id="colors">
       <h2>色彩系统 (OKLCH)</h2>
       <div class="color-grid">
-        <div class="color-swatch" style="background: var(--lumin-primary);">Primary</div>
-        <div class="color-swatch" style="background: var(--lumin-success);">Success</div>
-        <div class="color-swatch" style="background: var(--lumin-warning);">Warning</div>
-        <div class="color-swatch" style="background: var(--lumin-error);">Error</div>
-        <div class="color-swatch" style="background: var(--lumin-info);">Info</div>
-        <div class="color-swatch" style="background: var(--lumin-bg-primary); border: 1px solid var(--lumin-border-color);">BG Primary</div>
-        <div class="color-swatch" style="background: var(--lumin-bg-secondary);">BG Secondary</div>
-        <div class="color-swatch" style="background: var(--lumin-bg-tertiary);">BG Tertiary</div>
-        <div class="color-swatch" style="background: var(--lumin-bg-elevated);">BG Elevated</div>
+        <div class="color-swatch" style="background: var(--lumin-primary);"><span style="background: oklch(0% 0 0 / 0.5); padding: 2px 6px; border-radius: 4px;">Primary</span></div>
+        <div class="color-swatch" style="background: var(--lumin-success);"><span style="background: oklch(0% 0 0 / 0.5); padding: 2px 6px; border-radius: 4px;">Success</span></div>
+        <div class="color-swatch" style="background: var(--lumin-warning);"><span style="background: oklch(0% 0 0 / 0.5); padding: 2px 6px; border-radius: 4px;">Warning</span></div>
+        <div class="color-swatch" style="background: var(--lumin-error);"><span style="background: oklch(0% 0 0 / 0.5); padding: 2px 6px; border-radius: 4px;">Error</span></div>
+        <div class="color-swatch" style="background: var(--lumin-info);"><span style="background: oklch(0% 0 0 / 0.5); padding: 2px 6px; border-radius: 4px;">Info</span></div>
+        <div class="color-swatch" style="background: var(--lumin-bg-primary); border: 1px solid var(--lumin-border-color);"><span style="background: oklch(0% 0 0 / 0.5); padding: 2px 6px; border-radius: 4px;">BG Primary</span></div>
+        <div class="color-swatch" style="background: var(--lumin-bg-secondary);"><span style="background: oklch(0% 0 0 / 0.5); padding: 2px 6px; border-radius: 4px;">BG Secondary</span></div>
+        <div class="color-swatch" style="background: var(--lumin-bg-tertiary);"><span style="background: oklch(0% 0 0 / 0.5); padding: 2px 6px; border-radius: 4px;">BG Tertiary</span></div>
+        <div class="color-swatch" style="background: var(--lumin-bg-elevated);"><span style="background: oklch(0% 0 0 / 0.5); padding: 2px 6px; border-radius: 4px;">BG Elevated</span></div>
       </div>
     </section>
 
     <!-- 按钮 -->
-    <section class="preview-section">
+    <section class="preview-section" id="buttons">
       <h2>按钮 (Button)</h2>
       <div class="preview-row">
         <button class="lumin-btn">默认按钮</button>
@@ -619,7 +724,7 @@
     </section>
 
     <!-- 卡片 -->
-    <section class="preview-section">
+    <section class="preview-section" id="cards">
       <h2>卡片 (Card) — Double-Bezel</h2>
       <div class="preview-grid">
         <div class="lumin-card">
@@ -638,7 +743,7 @@
     </section>
 
     <!-- 输入框 -->
-    <section class="preview-section">
+    <section class="preview-section" id="inputs">
       <h2>输入框 (Input)</h2>
       <div class="preview-row" style="max-width: 400px;">
         <input class="lumin-input" placeholder="请输入内容..." />
@@ -661,7 +766,7 @@
     </section>
 
     <!-- 徽章 -->
-    <section class="preview-section">
+    <section class="preview-section" id="badges">
       <h2>徽章 (Badge)</h2>
       <div class="preview-row">
         <span class="lumin-badge lumin-badge--primary">Primary</span>
@@ -674,7 +779,7 @@
     </section>
 
     <!-- 进度条 -->
-    <section class="preview-section">
+    <section class="preview-section" id="progress">
       <h2>进度条 (Progress)</h2>
       <div style="display: flex; flex-direction: column; gap: var(--lumin-space-md); max-width: 400px;">
         <div class="lumin-progress">
@@ -716,7 +821,7 @@
     </section>
 
     <!-- 动画 -->
-    <section class="preview-section">
+    <section class="preview-section" id="animations">
       <h2>动画 (Animations)</h2>
       <div class="preview-row">
         <div style="text-align: center;">
@@ -741,7 +846,7 @@
     </section>
 
     <!-- 设计模式 -->
-    <section class="preview-section">
+    <section class="preview-section" id="patterns">
       <h2>设计模式</h2>
       <div class="preview-grid">
         <div class="lumin-card" style="cursor: pointer;" onmouseover="this.style.transform='translateY(-1px)'" onmouseout="this.style.transform='translateY(0)'" onclick="this.style.transform='scale(0.98)'; setTimeout(() => this.style.transform='', 150)">
@@ -761,14 +866,33 @@
         </div>
       </div>
     </section>
+
+    <!-- 页脚 -->
+    <footer class="preview-footer">
+      <p>Lumin UI/UX - 现代、精致、沉浸式的视觉设计系统</p>
+      <p>从 <a href="https://github.com/nnkmn/Pixel-UI" target="_blank">Pixel UI</a> 重构而来</p>
+      <div class="preview-footer-links">
+        <a href="https://github.com/nnkmn/Lumin-UI-UX" target="_blank">GitHub</a>
+        <a href="https://github.com/nnkmn/Lumin-UI-UX/blob/main/README.md" target="_blank">文档</a>
+        <a href="https://github.com/nnkmn/Lumin-UI-UX/blob/main/LICENSE" target="_blank">License</a>
+      </div>
+    </footer>
   </div>
 
   <script>
     function toggleTheme() {
       const html = document.documentElement;
       const current = html.getAttribute('data-theme');
-      html.setAttribute('data-theme', current === 'dark' ? 'light' : 'dark');
+      const newTheme = current === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', newTheme);
+      document.getElementById('theme-icon').textContent = newTheme === 'dark' ? '☀️' : '🌙';
     }
+
+    // 初始化主题图标
+    (function() {
+      const theme = document.documentElement.getAttribute('data-theme');
+      document.getElementById('theme-icon').textContent = theme === 'dark' ? '☀️' : '🌙';
+    })();
   </script>
 </body>
 </html>
