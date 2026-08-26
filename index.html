@@ -236,15 +236,31 @@
       display: flex;
       flex-direction: column;
       gap: var(--lumin-space-xs);
+      background: var(--lumin-bg-elevated);
+      border: 1px solid var(--lumin-border-color);
+      border-radius: var(--lumin-radius-lg);
+      padding: var(--lumin-space-sm);
+      box-shadow: var(--lumin-shadow-md);
+    }
+
+    .preview-nav-title {
+      font-size: var(--lumin-text-xs);
+      font-weight: var(--lumin-font-semibold);
+      color: var(--lumin-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: var(--lumin-space-xs) var(--lumin-space-sm);
+      margin-bottom: var(--lumin-space-xs);
+      border-bottom: 1px solid var(--lumin-border-color-light);
     }
 
     .preview-nav a {
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 6px 12px;
-      background: var(--lumin-bg-secondary);
-      border: 1px solid var(--lumin-border-color);
+      padding: 8px 14px;
+      background: transparent;
+      border: 1px solid transparent;
       border-radius: var(--lumin-radius-md);
       color: var(--lumin-text-secondary);
       text-decoration: none;
@@ -258,8 +274,7 @@
     .preview-nav a:hover {
       background: var(--lumin-bg-tertiary);
       color: var(--lumin-text-primary);
-      transform: translateY(-1px);
-      border-color: var(--lumin-primary);
+      transform: translateX(4px);
     }
 
     /* 页脚 */
@@ -695,6 +710,7 @@
 <body>
   <!-- 导航 -->
   <nav class="preview-nav">
+    <div class="preview-nav-title">组件</div>
     <a href="#colors" title="色彩系统">色彩</a>
     <a href="#buttons" title="按钮">按钮</a>
     <a href="#cards" title="卡片">卡片</a>
