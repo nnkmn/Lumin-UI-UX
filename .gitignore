@@ -6,6 +6,5 @@ node_modules/
 __pycache__/
 *.pyc
 .env
-.trae/
-.reference/
+.trae/ 
 docs/reference/
