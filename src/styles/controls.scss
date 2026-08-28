@@ -742,3 +742,652 @@
 .lumin-toast__close:hover {
   color: var(--lumin-text-primary);
 }
+
+/* ================================================================
+   Checkbox 复选框
+   ================================================================ */
+.lumin-checkbox {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--lumin-space-sm);
+  cursor: pointer;
+  user-select: none;
+  font-size: var(--lumin-text-base);
+  color: var(--lumin-text-secondary);
+}
+
+.lumin-checkbox input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* 选框外观 */
+.lumin-checkbox::before {
+  content: '';
+  position: relative;
+  display: inline-flex;
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  background: var(--lumin-bg-input);
+  border: 1.5px solid var(--lumin-border-color);
+  border-radius: var(--lumin-radius-xs);
+  transition: background var(--lumin-transition-fast),
+              border-color var(--lumin-transition-fast),
+              box-shadow var(--lumin-transition-fast);
+}
+
+/* 勾选标记 */
+.lumin-checkbox::after {
+  content: '';
+  position: absolute;
+  left: 3px;
+  top: 5px;
+  width: 10px;
+  height: 6px;
+  border-left: 2px solid oklch(100% 0 0);
+  border-bottom: 2px solid oklch(100% 0 0);
+  transform: rotate(-45deg) scale(0);
+  transition: transform var(--lumin-transition-fast);
+}
+
+/* Hover 态 */
+.lumin-checkbox:hover::before {
+  border-color: var(--lumin-border-strong);
+}
+
+/* Focus 态 */
+.lumin-checkbox input:focus-visible + .lumin-checkbox,
+.lumin-checkbox:has(input:focus-visible)::before {
+  outline: 2px solid var(--lumin-accent);
+  outline-offset: 2px;
+}
+
+/* Checked 态 */
+.lumin-checkbox.is-checked::before {
+  background: var(--lumin-accent);
+  border-color: var(--lumin-accent);
+}
+
+.lumin-checkbox.is-checked::after {
+  transform: rotate(-45deg) scale(1);
+}
+
+/* Hover 时勾选框微调 */
+.lumin-checkbox.is-checked:hover::before {
+  background: var(--lumin-accent-hover);
+  border-color: var(--lumin-accent-hover);
+}
+
+/* Disabled 态 */
+.lumin-checkbox.is-disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+/* Error 态 */
+.lumin-checkbox.is-error::before {
+  border-color: var(--lumin-error);
+}
+
+.lumin-checkbox.is-error.is-checked::before {
+  background: var(--lumin-error);
+  border-color: var(--lumin-error);
+}
+
+/* ================================================================
+   Radio 单选按钮
+   ================================================================ */
+.lumin-radio {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--lumin-space-sm);
+  cursor: pointer;
+  user-select: none;
+  font-size: var(--lumin-text-base);
+  color: var(--lumin-text-secondary);
+}
+
+.lumin-radio input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* 圆圈外观 */
+.lumin-radio::before {
+  content: '';
+  position: relative;
+  display: inline-flex;
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  background: var(--lumin-bg-input);
+  border: 1.5px solid var(--lumin-border-color);
+  border-radius: 50%;
+  transition: background var(--lumin-transition-fast),
+              border-color var(--lumin-transition-fast),
+              box-shadow var(--lumin-transition-fast);
+}
+
+/* 内圆点 */
+.lumin-radio::after {
+  content: '';
+  position: absolute;
+  left: 5px;
+  top: 5px;
+  width: 8px;
+  height: 8px;
+  background: oklch(100% 0 0);
+  border-radius: 50%;
+  transform: scale(0);
+  transition: transform var(--lumin-transition-fast);
+}
+
+/* Hover 态 */
+.lumin-radio:hover::before {
+  border-color: var(--lumin-border-strong);
+}
+
+/* Focus 态 */
+.lumin-radio input:focus-visible + .lumin-radio,
+.lumin-radio:has(input:focus-visible)::before {
+  outline: 2px solid var(--lumin-accent);
+  outline-offset: 2px;
+}
+
+/* Checked 态 */
+.lumin-radio.is-checked::before {
+  background: var(--lumin-accent);
+  border-color: var(--lumin-accent);
+}
+
+.lumin-radio.is-checked::after {
+  transform: scale(1);
+}
+
+.lumin-radio.is-checked:hover::before {
+  background: var(--lumin-accent-hover);
+  border-color: var(--lumin-accent-hover);
+}
+
+/* Disabled 态 */
+.lumin-radio.is-disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+/* ================================================================
+   Tabs 标签页导航
+   ================================================================ */
+.lumin-tabs {
+  width: 100%;
+}
+
+.lumin-tabs__list {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  border-bottom: 1px solid var(--lumin-border-color-light);
+  position: relative;
+}
+
+.lumin-tabs__tab {
+  position: relative;
+  padding: var(--lumin-space-sm) var(--lumin-space-lg);
+  font-size: var(--lumin-text-base);
+  font-weight: var(--lumin-font-normal);
+  color: var(--lumin-text-secondary);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color var(--lumin-transition-fast),
+              background var(--lumin-transition-fast);
+}
+
+.lumin-tabs__tab:hover {
+  color: var(--lumin-text-primary);
+  background: color-mix(in oklab, var(--lumin-text) 3%, transparent);
+}
+
+/* 活跃指示器 — 底部条 */
+.lumin-tabs__tab.active {
+  color: var(--lumin-accent);
+  font-weight: var(--lumin-font-medium);
+}
+
+.lumin-tabs__tab.active::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--lumin-accent);
+  border-radius: 1px 1px 0 0;
+  animation: fade-in var(--lumin-transition-fast);
+}
+
+/* 内容面板 */
+.lumin-tabs__panel {
+  padding: var(--lumin-space-lg) 0;
+  font-size: var(--lumin-text-base);
+  color: var(--lumin-text-secondary);
+  line-height: 1.6;
+}
+
+.lumin-tabs__panel[hidden] {
+  display: none;
+}
+
+/* ================================================================
+   Tooltip 提示
+   ================================================================ */
+.lumin-tooltip {
+  position: relative;
+  display: inline-flex;
+}
+
+/* Tooltip 内容 */
+.lumin-tooltip::before,
+.lumin-tooltip::after {
+  position: absolute;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--lumin-transition-fast),
+              visibility var(--lumin-transition-fast),
+              transform var(--lumin-transition-fast);
+}
+
+/* Tooltip 文字气泡 */
+.lumin-tooltip::before {
+  content: attr(data-tooltip);
+  z-index: var(--lumin-z-float);
+  padding: 6px 10px;
+  background: var(--lumin-bg-elevated);
+  color: var(--lumin-text-primary);
+  font-size: var(--lumin-text-xs);
+  font-weight: var(--lumin-font-normal);
+  line-height: 1.4;
+  white-space: nowrap;
+  border-radius: var(--lumin-radius-sm);
+  box-shadow: var(--lumin-shadow-md);
+  border: 1px solid var(--lumin-border-color);
+}
+
+/* Tooltip 箭头 */
+.lumin-tooltip::after {
+  content: '';
+  z-index: var(--lumin-z-float);
+  width: 8px;
+  height: 8px;
+  background: var(--lumin-bg-elevated);
+  border: 1px solid var(--lumin-border-color);
+  transform: rotate(45deg);
+}
+
+/* Show on hover */
+.lumin-tooltip:hover::before,
+.lumin-tooltip:hover::after {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Position: top（默认） */
+.lumin-tooltip::before {
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+}
+
+.lumin-tooltip::after {
+  bottom: calc(100% + 4px);
+  left: 50%;
+  margin-left: -4px;
+  border-top: none;
+  border-left: none;
+}
+
+.lumin-tooltip:hover::before {
+  transform: translateX(-50%) translateY(0);
+}
+
+.lumin-tooltip:hover::after {
+  transform: rotate(45deg);
+}
+
+/* Position: bottom */
+.lumin-tooltip.is-bottom::before {
+  top: calc(100% + 8px);
+  bottom: auto;
+  left: 50%;
+  transform: translateX(-50%) translateY(-4px);
+}
+
+.lumin-tooltip.is-bottom::after {
+  top: calc(100% + 4px);
+  bottom: auto;
+  left: 50%;
+  margin-left: -4px;
+  border-top: 1px solid var(--lumin-border-color);
+  border-left: 1px solid var(--lumin-border-color);
+  border-bottom: none;
+  border-right: none;
+}
+
+.lumin-tooltip.is-bottom:hover::before {
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Position: left */
+.lumin-tooltip.is-left::before {
+  right: calc(100% + 8px);
+  bottom: auto;
+  left: auto;
+  top: 50%;
+  transform: translateY(-50%) translateX(4px);
+}
+
+.lumin-tooltip.is-left::after {
+  right: calc(100% + 4px);
+  bottom: auto;
+  left: auto;
+  top: 50%;
+  margin-top: -4px;
+  border-top: 1px solid var(--lumin-border-color);
+  border-left: 1px solid var(--lumin-border-color);
+  border-bottom: none;
+  border-right: none;
+}
+
+.lumin-tooltip.is-left:hover::before {
+  transform: translateY(-50%) translateX(0);
+}
+
+/* Position: right */
+.lumin-tooltip.is-right::before {
+  left: calc(100% + 8px);
+  bottom: auto;
+  top: 50%;
+  transform: translateY(-50%) translateX(-4px);
+}
+
+.lumin-tooltip.is-right::after {
+  left: calc(100% + 4px);
+  bottom: auto;
+  top: 50%;
+  margin-top: -4px;
+  border-top: none;
+  border-left: none;
+  border-bottom: 1px solid var(--lumin-border-color);
+  border-right: 1px solid var(--lumin-border-color);
+}
+
+.lumin-tooltip.is-right:hover::before {
+  transform: translateY(-50%) translateX(0);
+}
+
+/* ================================================================
+   Alert 提醒框
+   ================================================================ */
+.lumin-alert {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--lumin-space-md);
+  padding: var(--lumin-space-md) var(--lumin-space-lg);
+  background: var(--lumin-bg-secondary);
+  border-radius: var(--lumin-radius-md);
+  border-left: 3px solid var(--lumin-border-color);
+}
+
+/* 图标槽位 */
+.lumin-alert__icon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  margin-top: 1px;
+}
+
+/* 内容区域 */
+.lumin-alert__content {
+  flex: 1;
+  min-width: 0;
+}
+
+.lumin-alert__title {
+  font-size: var(--lumin-text-base);
+  font-weight: var(--lumin-font-medium);
+  color: var(--lumin-text-primary);
+  line-height: 1.4;
+}
+
+.lumin-alert__description {
+  font-size: var(--lumin-text-sm);
+  color: var(--lumin-text-secondary);
+  margin-top: 2px;
+  line-height: 1.5;
+}
+
+/* 关闭按钮 */
+.lumin-alert__close {
+  flex-shrink: 0;
+  cursor: pointer;
+  color: var(--lumin-text-muted);
+  transition: color var(--lumin-transition-fast);
+}
+
+.lumin-alert__close:hover {
+  color: var(--lumin-text-primary);
+}
+
+/* Variant: Success */
+.lumin-alert--success {
+  border-left-color: var(--lumin-success);
+}
+
+.lumin-alert--success .lumin-alert__icon {
+  color: var(--lumin-success);
+}
+
+/* Variant: Warning */
+.lumin-alert--warning {
+  border-left-color: var(--lumin-warning);
+}
+
+.lumin-alert--warning .lumin-alert__icon {
+  color: var(--lumin-warning);
+}
+
+/* Variant: Error */
+.lumin-alert--error {
+  border-left-color: var(--lumin-error);
+}
+
+.lumin-alert--error .lumin-alert__icon {
+  color: var(--lumin-error);
+}
+
+/* Variant: Info */
+.lumin-alert--info {
+  border-left-color: var(--lumin-info);
+}
+
+.lumin-alert--info .lumin-alert__icon {
+  color: var(--lumin-info);
+}
+
+/* ================================================================
+   Avatar 头像
+   ================================================================ */
+.lumin-avatar {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--lumin-bg-tertiary);
+  color: var(--lumin-text-secondary);
+  font-weight: var(--lumin-font-medium);
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+/* 图片 */
+.lumin-avatar__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+/* 首字母 fallback */
+.lumin-avatar__initials {
+  font-size: var(--lumin-text-sm);
+  line-height: 1;
+  user-select: none;
+}
+
+/* 尺寸: sm — 32px */
+.lumin-avatar--sm {
+  width: 32px;
+  height: 32px;
+}
+
+.lumin-avatar--sm .lumin-avatar__initials {
+  font-size: var(--lumin-text-xs);
+}
+
+/* 尺寸: md — 40px（默认） */
+.lumin-avatar--md {
+  width: 40px;
+  height: 40px;
+}
+
+/* 尺寸: lg — 56px */
+.lumin-avatar--lg {
+  width: 56px;
+  height: 56px;
+}
+
+.lumin-avatar--lg .lumin-avatar__initials {
+  font-size: var(--lumin-text-lg);
+}
+
+/* 尺寸: xl — 80px */
+.lumin-avatar--xl {
+  width: 80px;
+  height: 80px;
+}
+
+.lumin-avatar--xl .lumin-avatar__initials {
+  font-size: var(--lumin-text-2xl);
+}
+
+/* 状态指示点 */
+.lumin-avatar__status {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 2px solid var(--lumin-bg-secondary);
+}
+
+/* 在线 */
+.lumin-avatar__status--online {
+  background: var(--lumin-success);
+}
+
+/* 离线 */
+.lumin-avatar__status--offline {
+  background: var(--lumin-text-muted);
+}
+
+/* 离开 */
+.lumin-avatar__status--away {
+  background: var(--lumin-warning);
+}
+
+/* ================================================================
+   Table 数据表格
+   ================================================================ */
+.lumin-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  border: 1px solid var(--lumin-border-color-light);
+  border-radius: var(--lumin-radius-md);
+}
+
+.lumin-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--lumin-text-base);
+  color: var(--lumin-text-secondary);
+}
+
+.lumin-table th {
+  text-align: left;
+  padding: var(--lumin-space-sm) var(--lumin-space-md);
+  font-weight: var(--lumin-font-medium);
+  color: var(--lumin-text-tertiary);
+  border-bottom: 1px solid var(--lumin-border-color);
+  white-space: nowrap;
+}
+
+.lumin-table td {
+  padding: var(--lumin-space-sm) var(--lumin-space-md);
+  border-bottom: 1px solid var(--lumin-border-color-light);
+  color: var(--lumin-text-secondary);
+}
+
+.lumin-table tr:last-child td {
+  border-bottom: none;
+}
+
+/* 斑马纹行 */
+.lumin-table--striped tbody tr:nth-child(even) {
+  background: color-mix(in oklab, var(--lumin-text) 2%, transparent);
+}
+
+/* 行 Hover 高亮 */
+.lumin-table tbody tr {
+  transition: background var(--lumin-transition-fast);
+  cursor: default;
+}
+
+.lumin-table tbody tr:hover {
+  background: color-mix(in oklab, var(--lumin-text) 4%, transparent);
+}
+
+/* 表头排序指示器 */
+.lumin-table th.is-sortable {
+  cursor: pointer;
+  user-select: none;
+}
+
+.lumin-table th.is-sortable:hover {
+  color: var(--lumin-text-primary);
+}
+
+/* 紧凑模式 */
+.lumin-table--compact th,
+.lumin-table--compact td {
+  padding: var(--lumin-space-xs) var(--lumin-space-sm);
+}
+
+/* 边框模式 */
+.lumin-table--bordered td,
+.lumin-table--bordered th {
+  border: 1px solid var(--lumin-border-color-light);
+}

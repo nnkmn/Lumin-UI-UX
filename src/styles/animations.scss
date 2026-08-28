@@ -373,3 +373,55 @@
   border-color: var(--lumin-primary);
   box-shadow: 0 0 0 3px var(--lumin-primary-light);
 }
+
+/* ============================================
+   性能优化 — Compositor-Only 动画
+   ============================================ */
+
+/* 所有动画元素使用 GPU 合成层 */
+.gpu-layer {
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* 动画类强制 GPU 加速 */
+.animate-fade-in,
+.animate-slide-up,
+.animate-slide-down,
+.animate-slide-left,
+.animate-slide-right,
+.animate-scale-in,
+.animate-scale-out {
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+}
+
+/* 交互元素 GPU 加速 */
+.hover-lift,
+.hover-lift-press,
+.press-scale,
+.hover-glow,
+.hover-border-glow {
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+/* 内容可见性优化 — 离屏元素跳过渲染 */
+.content-visibility-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 200px;
+}
+
+/* 减少重绘 — 仅在需要时触发 */
+.contain-layout {
+  contain: layout;
+}
+
+.contain-paint {
+  contain: paint;
+}
+
+.contain-strict {
+  contain: layout style paint;
+}

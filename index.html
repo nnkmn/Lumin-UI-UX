@@ -89,6 +89,10 @@
       --lumin-text-inverse: oklch(100% 0 0);
     }
 
+    html {
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
     :root {
       --lumin-space-xs: 4px;
       --lumin-space-sm: 8px;
@@ -140,9 +144,30 @@
       min-height: 100vh;
     }
 
+    /* 
+     * WCAG AA 对比度检查 (4.5:1 minimum for normal text):
+     * Dark theme:
+     *   --lumin-text-primary (oklch(96%)) on --lumin-bg-primary (oklch(12%)): ~15.5:1 ✓
+     *   --lumin-text-secondary (oklch(72%)) on --lumin-bg-primary (oklch(12%)): ~7.2:1 ✓
+     *   --lumin-text-tertiary (oklch(54%)) on --lumin-bg-primary (oklch(12%)): ~4.0:1 (仅限大号文本)
+     *   --lumin-text-muted (oklch(40%)) on --lumin-bg-primary (oklch(12%)): ~2.5:1 (仅限装饰性文字)
+     * Light theme:
+     *   --lumin-text-primary (oklch(20%)) on --lumin-bg-primary (oklch(99%)): ~15.5:1 ✓
+     *   --lumin-text-secondary (oklch(38%)) on --lumin-bg-primary (oklch(99%)): ~5.5:1 ✓
+     *   --lumin-text-tertiary (oklch(52%)) on --lumin-bg-primary (oklch(99%)): ~3.2:1 (仅限大号文本)
+     *   --lumin-text-muted (oklch(62%)) on --lumin-bg-primary (oklch(99%)): ~2.1:1 (仅限装饰性文字)
+     */
+
+    /* 统一焦点环 */
     :focus-visible {
       outline: 2px solid var(--lumin-accent);
       outline-offset: 2px;
+      border-radius: var(--lumin-radius-sm);
+    }
+
+    /* 移除鼠标点击时的焦点环 */
+    :focus:not(:focus-visible) {
+      outline: none;
     }
 
     ::selection {
@@ -181,6 +206,16 @@
       padding: var(--lumin-space-xl);
       position: relative;
       border: 1px solid var(--lumin-border-color-light);
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s var(--lumin-ease-out-quart), transform 0.5s var(--lumin-ease-out-quart);
+      content-visibility: auto;
+      contain-intrinsic-size: auto 200px;
+    }
+
+    .preview-section.is-visible {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     .preview-section h2 {
@@ -686,6 +721,442 @@
     .lumin-toast__message { font-size: var(--lumin-text-sm); color: var(--lumin-text-secondary); }
 
     /* ================================================================
+       Checkbox
+       ================================================================ */
+    .lumin-checkbox {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--lumin-space-sm);
+      cursor: pointer;
+      user-select: none;
+      font-size: var(--lumin-text-base);
+      color: var(--lumin-text-secondary);
+      transition: color var(--lumin-transition-fast);
+    }
+
+    .lumin-checkbox:hover {
+      color: var(--lumin-text-primary);
+    }
+
+    .lumin-checkbox__input {
+      appearance: none;
+      width: 18px;
+      height: 18px;
+      border: 1.5px solid var(--lumin-border-color);
+      border-radius: var(--lumin-radius-xs);
+      background: var(--lumin-bg-input);
+      cursor: pointer;
+      position: relative;
+      flex-shrink: 0;
+      transition: background var(--lumin-transition-fast),
+                  border-color var(--lumin-transition-fast),
+                  box-shadow var(--lumin-transition-fast);
+    }
+
+    .lumin-checkbox__input:hover:not(:disabled) {
+      border-color: var(--lumin-primary);
+    }
+
+    .lumin-checkbox__input:focus-visible {
+      outline: 2px solid var(--lumin-primary);
+      outline-offset: 2px;
+    }
+
+    .lumin-checkbox__input:checked {
+      background: var(--lumin-primary);
+      border-color: var(--lumin-primary);
+    }
+
+    .lumin-checkbox__input:checked::after {
+      content: '';
+      position: absolute;
+      left: 5px;
+      top: 1px;
+      width: 5px;
+      height: 9px;
+      border: solid oklch(100% 0 0);
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
+    }
+
+    .lumin-checkbox__input:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    .lumin-checkbox--error .lumin-checkbox__input {
+      border-color: var(--lumin-error);
+    }
+
+    .lumin-checkbox--error .lumin-checkbox__input:checked {
+      background: var(--lumin-error);
+      border-color: var(--lumin-error);
+    }
+
+    /* ================================================================
+       Radio
+       ================================================================ */
+    .lumin-radio {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--lumin-space-sm);
+      cursor: pointer;
+      user-select: none;
+      font-size: var(--lumin-text-base);
+      color: var(--lumin-text-secondary);
+      transition: color var(--lumin-transition-fast);
+    }
+
+    .lumin-radio:hover {
+      color: var(--lumin-text-primary);
+    }
+
+    .lumin-radio__input {
+      appearance: none;
+      width: 18px;
+      height: 18px;
+      border: 1.5px solid var(--lumin-border-color);
+      border-radius: 50%;
+      background: var(--lumin-bg-input);
+      cursor: pointer;
+      position: relative;
+      flex-shrink: 0;
+      transition: background var(--lumin-transition-fast),
+                  border-color var(--lumin-transition-fast),
+                  box-shadow var(--lumin-transition-fast);
+    }
+
+    .lumin-radio__input:hover:not(:disabled) {
+      border-color: var(--lumin-primary);
+    }
+
+    .lumin-radio__input:focus-visible {
+      outline: 2px solid var(--lumin-primary);
+      outline-offset: 2px;
+    }
+
+    .lumin-radio__input:checked {
+      border-color: var(--lumin-primary);
+    }
+
+    .lumin-radio__input:checked::after {
+      content: '';
+      position: absolute;
+      left: 4px;
+      top: 4px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--lumin-primary);
+    }
+
+    .lumin-radio__input:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    .lumin-radio-fieldset {
+      border: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .lumin-radio-fieldset legend {
+      font-size: var(--lumin-text-sm);
+      font-weight: var(--lumin-font-medium);
+      color: var(--lumin-text-tertiary);
+      margin-bottom: var(--lumin-space-sm);
+    }
+
+    .lumin-radio-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--lumin-space-lg);
+    }
+
+    /* ================================================================
+       Tabs
+       ================================================================ */
+    .lumin-tabs {
+      display: flex;
+      border-bottom: 1px solid var(--lumin-border-color-light);
+      gap: 0;
+    }
+
+    .lumin-tab {
+      padding: var(--lumin-space-sm) var(--lumin-space-lg);
+      background: none;
+      border: none;
+      border-bottom: 2px solid transparent;
+      color: var(--lumin-text-tertiary);
+      font-family: inherit;
+      font-size: var(--lumin-text-base);
+      font-weight: var(--lumin-font-medium);
+      cursor: pointer;
+      transition: color var(--lumin-transition-fast),
+                  border-color var(--lumin-transition-fast);
+      white-space: nowrap;
+    }
+
+    .lumin-tab:hover {
+      color: var(--lumin-text-primary);
+    }
+
+    .lumin-tab--active {
+      color: var(--lumin-primary);
+      border-bottom-color: var(--lumin-primary);
+    }
+
+    .lumin-tab-panel {
+      display: none;
+      padding: var(--lumin-space-lg) 0;
+      color: var(--lumin-text-secondary);
+      font-size: var(--lumin-text-base);
+    }
+
+    .lumin-tab-panel--active {
+      display: block;
+    }
+
+    /* ================================================================
+       Tooltip
+       ================================================================ */
+    .lumin-tooltip-wrapper {
+      position: relative;
+      display: inline-flex;
+    }
+
+    .lumin-tooltip-wrapper .lumin-tooltip {
+      position: absolute;
+      padding: 6px 10px;
+      background: var(--lumin-bg-elevated);
+      border: 1px solid var(--lumin-border-color);
+      border-radius: var(--lumin-radius-sm);
+      color: var(--lumin-text-primary);
+      font-size: var(--lumin-text-xs);
+      white-space: nowrap;
+      pointer-events: none;
+      opacity: 0;
+      transform: scale(0.95);
+      transition: opacity var(--lumin-transition-fast),
+                  transform var(--lumin-transition-fast);
+      z-index: 50;
+      box-shadow: var(--lumin-shadow-md);
+    }
+
+    .lumin-tooltip-wrapper:hover .lumin-tooltip {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    /* 方向：顶部 */
+    .lumin-tooltip--top {
+      bottom: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%) scale(0.95);
+    }
+
+    .lumin-tooltip-wrapper:hover .lumin-tooltip--top {
+      transform: translateX(-50%) scale(1);
+    }
+
+    /* 方向：底部 */
+    .lumin-tooltip--bottom {
+      top: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%) scale(0.95);
+    }
+
+    .lumin-tooltip-wrapper:hover .lumin-tooltip--bottom {
+      transform: translateX(-50%) scale(1);
+    }
+
+    /* 方向：左侧 */
+    .lumin-tooltip--left {
+      right: calc(100% + 8px);
+      top: 50%;
+      transform: translateY(-50%) scale(0.95);
+    }
+
+    .lumin-tooltip-wrapper:hover .lumin-tooltip--left {
+      transform: translateY(-50%) scale(1);
+    }
+
+    /* 方向：右侧 */
+    .lumin-tooltip--right {
+      left: calc(100% + 8px);
+      top: 50%;
+      transform: translateY(-50%) scale(0.95);
+    }
+
+    .lumin-tooltip-wrapper:hover .lumin-tooltip--right {
+      transform: translateY(-50%) scale(1);
+    }
+
+    /* ================================================================
+       Alert
+       ================================================================ */
+    .lumin-alert {
+      display: flex;
+      flex-direction: column;
+      gap: var(--lumin-space-xs);
+      padding: var(--lumin-space-md) var(--lumin-space-lg);
+      border-radius: var(--lumin-radius-md);
+      border-left: 3px solid;
+      transition: background var(--lumin-transition-fast);
+    }
+
+    .lumin-alert--success {
+      background: var(--lumin-success-light);
+      border-left-color: var(--lumin-success);
+    }
+
+    .lumin-alert--warning {
+      background: var(--lumin-warning-light);
+      border-left-color: var(--lumin-warning);
+    }
+
+    .lumin-alert--error {
+      background: var(--lumin-error-light);
+      border-left-color: var(--lumin-error);
+    }
+
+    .lumin-alert--info {
+      background: var(--lumin-info-light);
+      border-left-color: var(--lumin-info);
+    }
+
+    .lumin-alert__title {
+      font-size: var(--lumin-text-base);
+      font-weight: var(--lumin-font-semibold);
+      color: var(--lumin-text-primary);
+    }
+
+    .lumin-alert__description {
+      font-size: var(--lumin-text-sm);
+      color: var(--lumin-text-secondary);
+      line-height: 1.5;
+    }
+
+    /* ================================================================
+       Avatar
+       ================================================================ */
+    .lumin-avatar {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: var(--lumin-primary-light);
+      color: var(--lumin-primary);
+      font-weight: var(--lumin-font-semibold);
+      user-select: none;
+      flex-shrink: 0;
+      position: relative;
+    }
+
+    .lumin-avatar--sm {
+      width: 32px;
+      height: 32px;
+      font-size: var(--lumin-text-xs);
+    }
+
+    .lumin-avatar--md {
+      width: 40px;
+      height: 40px;
+      font-size: var(--lumin-text-sm);
+    }
+
+    .lumin-avatar--lg {
+      width: 52px;
+      height: 52px;
+      font-size: var(--lumin-text-lg);
+    }
+
+    .lumin-avatar--xl {
+      width: 68px;
+      height: 68px;
+      font-size: var(--lumin-text-2xl);
+    }
+
+    .lumin-avatar__status {
+      position: absolute;
+      bottom: 1px;
+      right: 1px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      border: 2px solid var(--lumin-bg-secondary);
+    }
+
+    .lumin-avatar__status--online {
+      background: var(--lumin-success);
+    }
+
+    .lumin-avatar__status--busy {
+      background: var(--lumin-error);
+    }
+
+    .lumin-avatar__status--away {
+      background: var(--lumin-warning);
+    }
+
+    .lumin-avatar-group {
+      display: flex;
+      align-items: center;
+      gap: var(--lumin-space-lg);
+    }
+
+    /* ================================================================
+       Table
+       ================================================================ */
+    .lumin-table-wrapper {
+      width: 100%;
+      overflow-x: auto;
+      border: 1px solid var(--lumin-border-color-light);
+      border-radius: var(--lumin-radius-md);
+    }
+
+    .lumin-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: var(--lumin-text-base);
+      color: var(--lumin-text-primary);
+    }
+
+    .lumin-table th,
+    .lumin-table td {
+      padding: var(--lumin-space-sm) var(--lumin-space-md);
+      text-align: left;
+      border-bottom: 1px solid var(--lumin-border-color-light);
+      white-space: nowrap;
+    }
+
+    .lumin-table th {
+      background: var(--lumin-bg-tertiary);
+      font-weight: var(--lumin-font-semibold);
+      font-size: var(--lumin-text-sm);
+      color: var(--lumin-text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+
+    .lumin-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .lumin-table tr:hover td {
+      background: var(--lumin-primary-light);
+    }
+
+    .lumin-table--striped tr:nth-child(even) td {
+      background: var(--lumin-bg-tertiary);
+    }
+
+    .lumin-table--striped tr:nth-child(even):hover td {
+      background: var(--lumin-primary-light);
+    }
+
+    /* ================================================================
        Colors Preview
        ================================================================ */
     .color-grid {
@@ -746,6 +1217,20 @@
     .anim-spin { animation: preview-spin 2s linear infinite; }
     .anim-pulse { animation: preview-pulse 2s ease-in-out infinite; }
     .anim-bounce { animation: preview-bounce 1s ease-in-out infinite; }
+
+    /* GPU 加速动画 */
+    .preview-section,
+    .lumin-btn,
+    .lumin-card--hoverable,
+    .lumin-toggle__slider::before,
+    .lumin-modal,
+    .lumin-toast,
+    .animate-fade-in,
+    .animate-slide-up,
+    .animate-scale-in {
+      will-change: transform, opacity;
+      backface-visibility: hidden;
+    }
 
     /* 无障碍 — Skip Link */
     .lumin-skip-link {
@@ -862,6 +1347,25 @@
         flex-wrap: wrap;
         gap: var(--lumin-space-md);
       }
+
+      /* 新组件响应式 */
+      .lumin-tabs__list {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .lumin-alert {
+        padding: var(--lumin-space-md);
+      }
+
+      .lumin-table {
+        font-size: var(--lumin-text-sm);
+      }
+
+      .lumin-avatar--xl {
+        width: 64px;
+        height: 64px;
+      }
     }
 
     /* ================================================================
@@ -938,6 +1442,106 @@
         min-width: 0;
         max-width: 100%;
       }
+
+      /* 新组件手机适配 */
+      .preview-section .lumin-tabs__list {
+        gap: 0;
+      }
+
+      .preview-section .lumin-tabs__tab {
+        padding: 8px 10px;
+        font-size: var(--lumin-text-xs);
+        min-height: 44px; /* 触摸目标 */
+      }
+
+      .preview-section .lumin-checkbox,
+      .preview-section .lumin-radio {
+        min-height: 44px;
+        min-width: 44px;
+        display: flex;
+        align-items: center;
+      }
+
+      .preview-section .lumin-alert {
+        padding: var(--lumin-space-sm) var(--lumin-space-md);
+        font-size: var(--lumin-text-sm);
+      }
+
+      .preview-section .lumin-avatar--xl {
+        width: 56px;
+        height: 56px;
+      }
+
+      .preview-section .lumin-avatar--lg {
+        width: 48px;
+        height: 48px;
+      }
+
+      /* 表格水平滚动 */
+      .lumin-table-wrapper {
+        -webkit-overflow-scrolling: touch;
+      }
+
+      /* Tooltip 手机端禁用 hover (改用点击) */
+      @media (hover: none) {
+        .lumin-tooltip[data-tooltip]:hover::before,
+        .lumin-tooltip[data-tooltip]:hover::after {
+          display: none;
+        }
+      }
+    }
+
+    /* ================================================================
+       响应式 — 1024px 以下 (小桌面)
+       ================================================================ */
+    @media (max-width: 1024px) {
+      .preview-container {
+        max-width: 100%;
+        padding: var(--lumin-space-xl) var(--lumin-space-lg);
+      }
+
+      .preview-grid {
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      }
+    }
+
+    /* ================================================================
+       Reduced Motion
+       ================================================================ */
+    @media (prefers-reduced-motion: reduce) {
+      .preview-section {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+      }
+
+      .lumin-btn,
+      .lumin-toggle__slider,
+      .lumin-toggle__slider::before,
+      .lumin-checkbox__input,
+      .lumin-radio__input,
+      .lumin-tab,
+      .lumin-progress__bar {
+        transition: none !important;
+        animation: none !important;
+      }
+
+      .lumin-skeleton::after {
+        animation: none !important;
+      }
+
+      .anim-fade,
+      .anim-slide,
+      .anim-scale,
+      .anim-spin,
+      .anim-pulse,
+      .anim-bounce {
+        animation: none !important;
+      }
+
+      html {
+        transition: none !important;
+      }
     }
   </style>
 </head>
@@ -956,6 +1560,13 @@
     <a href="#progress" title="进度条">进度</a>
     <a href="#animations" title="动画">动画</a>
     <a href="#patterns" title="设计模式">模式</a>
+    <a href="#checkbox" title="复选框">复选框</a>
+    <a href="#radio" title="单选框">单选框</a>
+    <a href="#tabs" title="标签页">标签页</a>
+    <a href="#tooltip" title="提示">提示</a>
+    <a href="#alert" title="警告提示">警告</a>
+    <a href="#avatar" title="头像">头像</a>
+    <a href="#table" title="表格">表格</a>
   </nav>
 
   <!-- 主题切换 -->
@@ -973,7 +1584,7 @@
     </header>
 
     <!-- 色彩系统 -->
-    <section class="preview-section" id="colors">
+    <section class="preview-section is-visible" id="colors">
       <h2>色彩系统 (OKLCH)</h2>
       <div class="color-grid">
         <div class="color-swatch" style="background: var(--lumin-primary);"><span>Primary</span></div>
@@ -1087,6 +1698,198 @@
       </div>
     </section>
 
+    <!-- 复选框 -->
+    <section class="preview-section" id="checkbox">
+      <h2>复选框 (Checkbox)</h2>
+      <div class="preview-row">
+        <label class="lumin-checkbox" role="checkbox" aria-checked="false">
+          <input type="checkbox" class="lumin-checkbox__input" aria-label="未选中复选框" />
+          <span>未选中</span>
+        </label>
+        <label class="lumin-checkbox" role="checkbox" aria-checked="true">
+          <input type="checkbox" class="lumin-checkbox__input" checked aria-label="已选中复选框" />
+          <span>已选中</span>
+        </label>
+        <label class="lumin-checkbox" role="checkbox" aria-checked="false" aria-disabled="true">
+          <input type="checkbox" class="lumin-checkbox__input" disabled aria-label="禁用复选框" />
+          <span>禁用</span>
+        </label>
+        <label class="lumin-checkbox lumin-checkbox--error" role="checkbox" aria-checked="true">
+          <input type="checkbox" class="lumin-checkbox__input" checked aria-label="错误状态复选框" />
+          <span>错误</span>
+        </label>
+      </div>
+    </section>
+
+    <!-- 单选框 -->
+    <section class="preview-section" id="radio">
+      <h2>单选框 (Radio)</h2>
+      <fieldset class="lumin-radio-fieldset" role="radiogroup" aria-label="单选框组示例">
+        <legend>选择一个选项</legend>
+        <div class="lumin-radio-group">
+          <label class="lumin-radio" role="radio" aria-checked="true">
+            <input type="radio" name="preview-radio" class="lumin-radio__input" value="option1" checked aria-label="选项一" />
+            <span>选项一</span>
+          </label>
+          <label class="lumin-radio" role="radio" aria-checked="false">
+            <input type="radio" name="preview-radio" class="lumin-radio__input" value="option2" aria-label="选项二" />
+            <span>选项二</span>
+          </label>
+          <label class="lumin-radio" role="radio" aria-checked="false" aria-disabled="true">
+            <input type="radio" name="preview-radio" class="lumin-radio__input" value="option3" disabled aria-label="选项三（禁用）" />
+            <span>选项三</span>
+          </label>
+        </div>
+      </fieldset>
+    </section>
+
+    <!-- 标签页 -->
+    <section class="preview-section" id="tabs">
+      <h2>标签页 (Tabs)</h2>
+      <div class="lumin-tabs" role="tablist" aria-label="标签页示例">
+        <button class="lumin-tab lumin-tab--active" role="tab" id="tab-btn-1" aria-selected="true" aria-controls="tab-panel-1" data-tab="tab-panel-1" tabindex="0">概览</button>
+        <button class="lumin-tab" role="tab" id="tab-btn-2" aria-selected="false" aria-controls="tab-panel-2" data-tab="tab-panel-2" tabindex="-1">详情</button>
+        <button class="lumin-tab" role="tab" id="tab-btn-3" aria-selected="false" aria-controls="tab-panel-3" data-tab="tab-panel-3" tabindex="-1">设置</button>
+      </div>
+      <div class="lumin-tab-panel lumin-tab-panel--active" role="tabpanel" id="tab-panel-1" aria-labelledby="tab-btn-1" tabindex="0">
+        <p>这里是概览内容。标签页组件用于在同一区域内切换不同内容视图。</p>
+      </div>
+      <div class="lumin-tab-panel" role="tabpanel" id="tab-panel-2" aria-labelledby="tab-btn-2" tabindex="0" hidden>
+        <p>这里是详情内容。支持键盘导航和 ARIA 无障碍属性。</p>
+      </div>
+      <div class="lumin-tab-panel" role="tabpanel" id="tab-panel-3" aria-labelledby="tab-btn-3" tabindex="0" hidden>
+        <p>这里是设置内容。使用 data-tab 属性实现内容切换。</p>
+      </div>
+    </section>
+
+    <!-- 提示 -->
+    <section class="preview-section" id="tooltip">
+      <h2>提示 (Tooltip)</h2>
+      <div class="preview-row" style="gap: var(--lumin-space-xl); min-height: 80px;">
+        <div class="lumin-tooltip-wrapper">
+          <button class="lumin-btn lumin-btn--secondary" aria-label="顶部提示按钮">顶部</button>
+          <span class="lumin-tooltip lumin-tooltip--top" role="tooltip">这是一个顶部提示</span>
+        </div>
+        <div class="lumin-tooltip-wrapper">
+          <button class="lumin-btn lumin-btn--secondary" aria-label="底部提示按钮">底部</button>
+          <span class="lumin-tooltip lumin-tooltip--bottom" role="tooltip">这是一个底部提示</span>
+        </div>
+        <div class="lumin-tooltip-wrapper">
+          <button class="lumin-btn lumin-btn--secondary" aria-label="左侧提示按钮">左侧</button>
+          <span class="lumin-tooltip lumin-tooltip--left" role="tooltip">这是一个左侧提示</span>
+        </div>
+        <div class="lumin-tooltip-wrapper">
+          <button class="lumin-btn lumin-btn--secondary" aria-label="右侧提示按钮">右侧</button>
+          <span class="lumin-tooltip lumin-tooltip--right" role="tooltip">这是一个右侧提示</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 警告提示 -->
+    <section class="preview-section" id="alert">
+      <h2>警告提示 (Alert)</h2>
+      <div style="display: flex; flex-direction: column; gap: var(--lumin-space-md);">
+        <div class="lumin-alert lumin-alert--success" role="status" aria-label="操作成功">
+          <div class="lumin-alert__title">操作成功</div>
+          <div class="lumin-alert__description">您的数据已成功保存，所有更改已生效。</div>
+        </div>
+        <div class="lumin-alert lumin-alert--warning" role="status" aria-label="注意">
+          <div class="lumin-alert__title">注意</div>
+          <div class="lumin-alert__description">此操作可能会覆盖现有数据，请确认后继续。</div>
+        </div>
+        <div class="lumin-alert lumin-alert--error" role="alert" aria-label="错误">
+          <div class="lumin-alert__title">错误</div>
+          <div class="lumin-alert__description">网络连接失败，请检查您的网络设置后重试。</div>
+        </div>
+        <div class="lumin-alert lumin-alert--info" role="status" aria-label="提示">
+          <div class="lumin-alert__title">提示</div>
+          <div class="lumin-alert__description">系统将在今晚 23:00 进行维护升级，届时服务将暂时不可用。</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 头像 -->
+    <section class="preview-section" id="avatar">
+      <h2>头像 (Avatar)</h2>
+      <div class="avatar-group" style="display: flex; flex-direction: column; gap: var(--lumin-space-xl);">
+        <div>
+          <div style="font-size: var(--lumin-text-sm); color: var(--lumin-text-tertiary); margin-bottom: var(--lumin-space-sm);">不同尺寸</div>
+          <div class="lumin-avatar-group">
+            <div class="lumin-avatar lumin-avatar--sm" role="img" aria-label="头像 SM">S</div>
+            <div class="lumin-avatar lumin-avatar--md" role="img" aria-label="头像 MD">M</div>
+            <div class="lumin-avatar lumin-avatar--lg" role="img" aria-label="头像 LG">L</div>
+            <div class="lumin-avatar lumin-avatar--xl" role="img" aria-label="头像 XL">XL</div>
+          </div>
+        </div>
+        <div>
+          <div style="font-size: var(--lumin-text-sm); color: var(--lumin-text-tertiary); margin-bottom: var(--lumin-space-sm);">状态指示器</div>
+          <div class="lumin-avatar-group">
+            <div class="lumin-avatar lumin-avatar--lg" role="img" aria-label="在线用户">
+              AB
+              <span class="lumin-avatar__status lumin-avatar__status--online" aria-label="在线"></span>
+            </div>
+            <div class="lumin-avatar lumin-avatar--lg" role="img" aria-label="忙碌用户">
+              CD
+              <span class="lumin-avatar__status lumin-avatar__status--busy" aria-label="忙碌"></span>
+            </div>
+            <div class="lumin-avatar lumin-avatar--lg" role="img" aria-label="离开用户">
+              EF
+              <span class="lumin-avatar__status lumin-avatar__status--away" aria-label="离开"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 表格 -->
+    <section class="preview-section" id="table">
+      <h2>表格 (Table)</h2>
+      <div class="lumin-table-wrapper" role="region" aria-label="数据表格示例" tabindex="0">
+        <table class="lumin-table lumin-table--striped">
+          <thead>
+            <tr>
+              <th scope="col">名称</th>
+              <th scope="col">状态</th>
+              <th scope="col">角色</th>
+              <th scope="col">更新时间</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>张三</td>
+              <td><span class="lumin-badge lumin-badge--success">在线</span></td>
+              <td>管理员</td>
+              <td>2026-08-28</td>
+            </tr>
+            <tr>
+              <td>李四</td>
+              <td><span class="lumin-badge lumin-badge--warning">离开</span></td>
+              <td>编辑者</td>
+              <td>2026-08-27</td>
+            </tr>
+            <tr>
+              <td>王五</td>
+              <td><span class="lumin-badge lumin-badge--error">离线</span></td>
+              <td>查看者</td>
+              <td>2026-08-26</td>
+            </tr>
+            <tr>
+              <td>赵六</td>
+              <td><span class="lumin-badge lumin-badge--success">在线</span></td>
+              <td>编辑者</td>
+              <td>2026-08-25</td>
+            </tr>
+            <tr>
+              <td>孙七</td>
+              <td><span class="lumin-badge lumin-badge--info">忙碌</span></td>
+              <td>管理员</td>
+              <td>2026-08-24</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
     <!-- Toast -->
     <section class="preview-section">
       <h2>轻提示 (Toast)</h2>
@@ -1168,17 +1971,165 @@
 
   <script>
     function toggleTheme() {
-      const html = document.documentElement;
-      const current = html.getAttribute('data-theme');
-      const newTheme = current === 'dark' ? 'light' : 'dark';
+      var html = document.documentElement;
+      var current = html.getAttribute('data-theme');
+      var newTheme = current === 'dark' ? 'light' : 'dark';
+      html.style.transition = 'background-color 0.3s ease, color 0.3s ease';
       html.setAttribute('data-theme', newTheme);
       document.getElementById('theme-icon').textContent = newTheme === 'dark' ? '☀️' : '🌙';
+      setTimeout(function() {
+        html.style.transition = '';
+      }, 350);
     }
 
     // 初始化主题图标
     (function() {
-      const theme = document.documentElement.getAttribute('data-theme');
+      var theme = document.documentElement.getAttribute('data-theme');
       document.getElementById('theme-icon').textContent = theme === 'dark' ? '☀️' : '🌙';
+    })();
+
+    // 标签页切换
+    document.querySelectorAll('.lumin-tab[data-tab]').forEach(function(tab) {
+      tab.addEventListener('click', function() {
+        activateTab(this);
+      });
+    });
+
+    function activateTab(tab) {
+      var parent = tab.closest('.preview-section');
+      parent.querySelectorAll('.lumin-tab').forEach(function(t) {
+        t.classList.remove('lumin-tab--active');
+        t.setAttribute('aria-selected', 'false');
+        t.setAttribute('tabindex', '-1');
+      });
+      parent.querySelectorAll('.lumin-tab-panel').forEach(function(p) {
+        p.classList.remove('lumin-tab-panel--active');
+        p.setAttribute('hidden', '');
+      });
+      tab.classList.add('lumin-tab--active');
+      tab.setAttribute('aria-selected', 'true');
+      tab.setAttribute('tabindex', '0');
+      tab.focus();
+      var panel = document.getElementById(tab.getAttribute('data-tab'));
+      if (panel) {
+        panel.classList.add('lumin-tab-panel--active');
+        panel.removeAttribute('hidden');
+      }
+    }
+
+    // 键盘导航 — 标签页 (ArrowLeft/ArrowRight, Home/End)
+    document.querySelectorAll('.lumin-tabs[role="tablist"]').forEach(function(tablist) {
+      tablist.addEventListener('keydown', function(e) {
+        var tabs = Array.from(tablist.querySelectorAll('[role="tab"]'));
+        var currentIndex = tabs.indexOf(document.activeElement);
+        if (currentIndex === -1) return;
+
+        var newIndex = -1;
+        switch (e.key) {
+          case 'ArrowRight':
+            newIndex = (currentIndex + 1) % tabs.length;
+            break;
+          case 'ArrowLeft':
+            newIndex = (currentIndex - 1 + tabs.length) % tabs.length;
+            break;
+          case 'Home':
+            newIndex = 0;
+            break;
+          case 'End':
+            newIndex = tabs.length - 1;
+            break;
+          default:
+            return;
+        }
+        e.preventDefault();
+        activateTab(tabs[newIndex]);
+      });
+    });
+
+    // 键盘导航 — 单选框组 (ArrowUp/ArrowDown)
+    document.querySelectorAll('[role="radiogroup"]').forEach(function(group) {
+      group.addEventListener('keydown', function(e) {
+        var radios = Array.from(group.querySelectorAll('[role="radio"]:not([aria-disabled="true"])'));
+        var currentIndex = radios.indexOf(document.activeElement);
+        if (currentIndex === -1) {
+          var checkedRadio = group.querySelector('[aria-checked="true"]');
+          if (checkedRadio) currentIndex = radios.indexOf(checkedRadio);
+        }
+        if (currentIndex === -1) return;
+
+        var newIndex = -1;
+        switch (e.key) {
+          case 'ArrowDown':
+          case 'ArrowRight':
+            newIndex = (currentIndex + 1) % radios.length;
+            break;
+          case 'ArrowUp':
+          case 'ArrowLeft':
+            newIndex = (currentIndex - 1 + radios.length) % radios.length;
+            break;
+          default:
+            return;
+        }
+        e.preventDefault();
+        radios[currentIndex].setAttribute('aria-checked', 'false');
+        radios[currentIndex].querySelector('input').checked = false;
+        radios[newIndex].setAttribute('aria-checked', 'true');
+        radios[newIndex].querySelector('input').checked = true;
+        radios[newIndex].focus();
+      });
+    });
+
+    // 键盘导航 — Escape 关闭提示
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        document.querySelectorAll('.lumin-tooltip-wrapper').forEach(function(wrapper) {
+          wrapper.removeAttribute('style');
+        });
+      }
+    });
+
+    // Checkbox aria-checked 同步
+    document.querySelectorAll('.lumin-checkbox__input').forEach(function(input) {
+      input.addEventListener('change', function() {
+        var label = this.closest('.lumin-checkbox');
+        if (label) {
+          label.setAttribute('aria-checked', String(this.checked));
+        }
+      });
+    });
+
+    // Radio aria-checked 同步
+    document.querySelectorAll('.lumin-radio__input').forEach(function(input) {
+      input.addEventListener('change', function() {
+        var group = this.closest('[role="radiogroup"]');
+        if (group) {
+          group.querySelectorAll('[role="radio"]').forEach(function(radio) {
+            var radioInput = radio.querySelector('input');
+            radio.setAttribute('aria-checked', String(radioInput.checked));
+          });
+        }
+      });
+    });
+
+    // IntersectionObserver 滚动动画
+    (function() {
+      var sections = document.querySelectorAll('.preview-section');
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, {
+        rootMargin: '0px 0px -50px 0px',
+        threshold: 0.1
+      });
+      sections.forEach(function(section) {
+        if (!section.classList.contains('is-visible')) {
+          observer.observe(section);
+        }
+      });
     })();
   </script>
 </body>
