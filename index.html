@@ -4,6 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Lumin UI/UX - 设计系统预览</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     /* ================================================================
        Lumin Design Tokens
@@ -36,6 +39,10 @@
       --lumin-shadow-sm: 0 1px 3px oklch(0% 0 0 / 0.3);
       --lumin-shadow-md: 0 4px 12px oklch(0% 0 0 / 0.35);
       --lumin-shadow-lg: 0 8px 32px oklch(0% 0 0 / 0.4);
+      --lumin-elevation-1: 0 1px 2px oklch(0% 0 0 / 0.2), 0 1px 3px oklch(0% 0 0 / 0.1);
+      --lumin-elevation-2: 0 2px 6px oklch(0% 0 0 / 0.2), 0 4px 12px oklch(0% 0 0 / 0.1);
+      --lumin-elevation-3: 0 4px 12px oklch(0% 0 0 / 0.25), 0 8px 24px oklch(0% 0 0 / 0.12);
+      --lumin-elevation-4: 0 8px 24px oklch(0% 0 0 / 0.3), 0 16px 48px oklch(0% 0 0 / 0.15);
       --lumin-glass-sidebar: oklch(14% 0.006 252 / 0.78);
       --lumin-glass-content: oklch(15% 0.006 252 / 0.72);
       --lumin-accent: var(--lumin-primary);
@@ -71,6 +78,10 @@
       --lumin-shadow-sm: 0 1px 3px oklch(0% 0 0 / 0.06);
       --lumin-shadow-md: 0 4px 12px oklch(0% 0 0 / 0.08);
       --lumin-shadow-lg: 0 8px 32px oklch(0% 0 0 / 0.1);
+      --lumin-elevation-1: 0 1px 2px oklch(0% 0 0 / 0.06), 0 1px 3px oklch(0% 0 0 / 0.04);
+      --lumin-elevation-2: 0 2px 6px oklch(0% 0 0 / 0.06), 0 4px 12px oklch(0% 0 0 / 0.04);
+      --lumin-elevation-3: 0 4px 12px oklch(0% 0 0 / 0.08), 0 8px 24px oklch(0% 0 0 / 0.05);
+      --lumin-elevation-4: 0 8px 24px oklch(0% 0 0 / 0.1), 0 16px 48px oklch(0% 0 0 / 0.06);
       --lumin-glass-sidebar: oklch(100% 0 0 / 0.78);
       --lumin-glass-content: oklch(100% 0 0 / 0.72);
       --lumin-accent: var(--lumin-primary);
@@ -96,7 +107,7 @@
       --lumin-ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
       --lumin-transition-fast: 120ms var(--lumin-ease-out-quart);
       --lumin-transition-normal: 250ms var(--lumin-ease-out-quart);
-      --lumin-font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      --lumin-font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
       --lumin-font-mono: 'JetBrains Mono', ui-monospace, monospace;
       --lumin-text-xs: 11px;
       --lumin-text-sm: 12px;
@@ -353,6 +364,33 @@
       background: var(--lumin-bg-tertiary);
       color: var(--lumin-text-muted);
       border: 1px solid var(--lumin-border-color);
+    }
+
+    .lumin-btn--loading {
+      pointer-events: none;
+      position: relative;
+      color: transparent !important;
+    }
+
+    .lumin-btn--loading::after {
+      content: '';
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      border: 2px solid currentColor;
+      border-right-color: transparent;
+      border-radius: 50%;
+      animation: spin 0.6s linear infinite;
+    }
+
+    .lumin-btn--primary.lumin-btn--loading::after {
+      border-color: oklch(100% 0 0 / 0.3);
+      border-right-color: oklch(100% 0 0);
+    }
+
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
     }
 
     .lumin-btn--primary {
@@ -708,9 +746,42 @@
     .anim-spin { animation: preview-spin 2s linear infinite; }
     .anim-pulse { animation: preview-pulse 2s ease-in-out infinite; }
     .anim-bounce { animation: preview-bounce 1s ease-in-out infinite; }
+
+    /* 无障碍 — Skip Link */
+    .lumin-skip-link {
+      position: absolute;
+      top: -100%;
+      left: var(--lumin-space-lg);
+      z-index: 99999;
+      padding: var(--lumin-space-sm) var(--lumin-space-lg);
+      background: var(--lumin-accent);
+      color: oklch(100% 0 0);
+      border-radius: var(--lumin-radius-md);
+      font-size: var(--lumin-text-base);
+      font-weight: var(--lumin-font-medium);
+      text-decoration: none;
+      transition: top var(--lumin-transition-fast);
+    }
+    .lumin-skip-link:focus { top: var(--lumin-space-lg); }
+
+    /* 屏幕阅读器专用 */
+    .lumin-sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
   </style>
 </head>
 <body>
+  <!-- 无障碍 — Skip Link -->
+  <a href="#main-content" class="lumin-skip-link">跳到主要内容</a>
+
   <!-- 导航 -->
   <nav class="preview-nav">
     <div class="preview-nav-title">组件</div>
@@ -726,12 +797,12 @@
 
   <!-- 主题切换 -->
   <div class="theme-toggle">
-    <button class="theme-toggle-btn" onclick="toggleTheme()" title="切换主题">
+    <button class="theme-toggle-btn" onclick="toggleTheme()" title="切换主题" aria-label="切换深色/浅色主题">
       <span id="theme-icon">☀️</span>
     </button>
   </div>
 
-  <div class="preview-container">
+  <div class="preview-container" id="main-content">
     <!-- Header -->
     <header class="preview-header">
       <h1>Lumin UI/UX</h1>
@@ -768,6 +839,7 @@
         <button class="lumin-btn">默认按钮</button>
         <button class="lumin-btn lumin-btn--lg">大按钮</button>
         <button class="lumin-btn" disabled>禁用按钮</button>
+        <button class="lumin-btn lumin-btn--primary lumin-btn--loading">加载中</button>
       </div>
     </section>
 
@@ -794,7 +866,10 @@
     <section class="preview-section" id="inputs">
       <h2>输入框 (Input)</h2>
       <div class="preview-row" style="max-width: 400px;">
-        <input class="lumin-input" placeholder="请输入内容..." />
+        <div style="width: 100%;">
+          <label for="preview-input" class="lumin-sr-only">示例输入框</label>
+          <input id="preview-input" class="lumin-input" placeholder="请输入内容..." aria-label="示例输入框" />
+        </div>
       </div>
     </section>
 
@@ -803,11 +878,11 @@
       <h2>开关 (Toggle)</h2>
       <div class="preview-row">
         <label class="lumin-toggle">
-          <input type="checkbox" />
+          <input type="checkbox" aria-label="开关示例" />
           <span class="lumin-toggle__slider"></span>
         </label>
         <label class="lumin-toggle">
-          <input type="checkbox" checked />
+          <input type="checkbox" checked aria-label="开关示例（已开启）" />
           <span class="lumin-toggle__slider"></span>
         </label>
       </div>
@@ -852,14 +927,14 @@
     <!-- Toast -->
     <section class="preview-section">
       <h2>轻提示 (Toast)</h2>
-      <div style="display: flex; flex-direction: column; gap: var(--lumin-space-md);">
-        <div class="lumin-toast lumin-toast--success">
+      <div style="display: flex; flex-direction: column; gap: var(--lumin-space-md);" role="log" aria-live="polite" aria-label="通知区域">
+        <div class="lumin-toast lumin-toast--success" role="status">
           <div>
             <div class="lumin-toast__title">操作成功</div>
             <div class="lumin-toast__message">数据已保存</div>
           </div>
         </div>
-        <div class="lumin-toast lumin-toast--error">
+        <div class="lumin-toast lumin-toast--error" role="alert">
           <div>
             <div class="lumin-toast__title">操作失败</div>
             <div class="lumin-toast__message">请检查网络连接</div>

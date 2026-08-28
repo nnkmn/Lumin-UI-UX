@@ -50,14 +50,22 @@
   padding: var(--lumin-space-lg);
 }
 
-/* 可悬浮卡片 */
+/* 可悬浮卡片 — Magnetic Hover + Scale */
 .lumin-card--hoverable {
-  transition: background var(--lumin-transition-fast);
+  transition: background var(--lumin-transition-fast),
+              transform var(--lumin-transition-fast),
+              box-shadow var(--lumin-transition-fast);
   cursor: pointer;
 }
 
 .lumin-card--hoverable:hover {
   background: color-mix(in oklab, var(--lumin-text) 2%, transparent);
+  transform: translateY(-2px) scale(1.01);
+  box-shadow: var(--lumin-elevation-2);
+}
+
+.lumin-card--hoverable:active {
+  transform: translateY(0) scale(0.99);
 }
 
 /* 卡片网格 */
@@ -108,6 +116,29 @@
   cursor: not-allowed;
   opacity: 0.4;
   transform: none;
+}
+
+/* 加载状态 — 禁用按钮 + 旋转指示器 */
+.lumin-btn--loading {
+  pointer-events: none;
+  position: relative;
+  color: transparent !important;
+}
+
+.lumin-btn--loading::after {
+  content: '';
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+}
+
+.lumin-btn--primary.lumin-btn--loading::after {
+  border-color: oklch(100% 0 0 / 0.3);
+  border-right-color: oklch(100% 0 0);
 }
 
 /* Primary — Button-in-Button */
@@ -609,6 +640,34 @@
 .lumin-modal__header {
   padding: var(--lumin-space-xl);
   border-bottom: 1px solid var(--lumin-border-color-light);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.lumin-modal__title {
+  font-size: var(--lumin-text-lg);
+  font-weight: var(--lumin-font-semibold);
+  color: var(--lumin-text-primary);
+  margin: 0;
+}
+
+.lumin-modal__close {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--lumin-radius-sm);
+  color: var(--lumin-text-muted);
+  cursor: pointer;
+  transition: background var(--lumin-transition-fast),
+              color var(--lumin-transition-fast);
+}
+
+.lumin-modal__close:hover {
+  background: var(--lumin-bg-hover);
+  color: var(--lumin-text-primary);
 }
 
 .lumin-modal__body {
@@ -634,6 +693,12 @@
   display: flex;
   flex-direction: column;
   gap: var(--lumin-space-sm);
+  /* 无障碍: aria-live="polite" 容器，屏幕阅读器自动播报 */
+}
+
+.lumin-toast[role="status"],
+.lumin-toast[role="alert"] {
+  /* 确保 Toast 对屏幕阅读器可见 */
 }
 
 .lumin-toast {

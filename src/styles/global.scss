@@ -4,6 +4,9 @@
  * 全局重置、滚动条、焦点环、选区、链接、代码块
  */
 
+/* Google Fonts — Inter (Spatial Clear 推荐) */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
 /* 基础重置 */
 *,
 *::before,
@@ -184,4 +187,41 @@ table {
     --lumin-glass-content: var(--lumin-bg-secondary);
     --lumin-glass-raised: var(--lumin-bg-elevated);
   }
+}
+
+/* ================================================================
+   无障碍 — Skip Link (键盘用户跳过导航)
+   ================================================================ */
+.lumin-skip-link {
+  position: absolute;
+  top: -100%;
+  left: var(--lumin-space-lg);
+  z-index: var(--lumin-z-max);
+  padding: var(--lumin-space-sm) var(--lumin-space-lg);
+  background: var(--lumin-accent);
+  color: oklch(100% 0 0);
+  border-radius: var(--lumin-radius-md);
+  font-size: var(--lumin-text-base);
+  font-weight: var(--lumin-font-medium);
+  text-decoration: none;
+  transition: top var(--lumin-transition-fast);
+}
+
+.lumin-skip-link:focus {
+  top: var(--lumin-space-lg);
+}
+
+/* ================================================================
+   无障碍 — 屏幕阅读器专用
+   ================================================================ */
+.lumin-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }

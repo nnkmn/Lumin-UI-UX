@@ -50,14 +50,14 @@ oklch(Lightness Chroma Hue)
 卡片和面板使用 `::before` 伪元素创建外层边框壳，元素本体作为内核，营造精致的嵌套层次感。
 
 ```css
-.px-card {
+.lumin-card {
   position: relative;
   background: var(--bg-secondary);
   border-radius: var(--radius-lg);
   box-shadow: inset 0 1px 1px oklch(100% 0 0 / 0.06);
 }
 
-.px-card::before {
+.lumin-card::before {
   content: '';
   position: absolute;
   inset: -1px;
@@ -73,12 +73,12 @@ oklch(Lightness Chroma Hue)
 主按钮内部使用 `::before` 伪元素创建顶部高光渐变，模拟玻璃质感。
 
 ```css
-.px-btn--primary {
+.lumin-btn--primary {
   position: relative;
   overflow: hidden;
 }
 
-.px-btn--primary::before {
+.lumin-btn--primary::before {
   content: '';
   position: absolute;
   top: 0;
@@ -99,11 +99,11 @@ oklch(Lightness Chroma Hue)
 导航项和按钮在 hover 时产生微妙抬升，按下时回弹，创造物理交互感。
 
 ```css
-.px-btn:hover {
+.lumin-btn:hover {
   transform: translateY(-1px);
 }
 
-.px-btn:active {
+.lumin-btn:active {
   transform: translateY(0) scale(0.98);
 }
 ```
@@ -115,13 +115,13 @@ oklch(Lightness Chroma Hue)
 使用 `backdrop-filter` 创建毛玻璃效果，配合半透明背景色。
 
 ```css
-.px-sidebar::before {
+.lumin-sidebar::before {
   background: var(--glass-sidebar);
   backdrop-filter: blur(16px) saturate(140%);
   -webkit-backdrop-filter: blur(16px) saturate(140%);
 }
 
-.px-titlebar {
+.lumin-titlebar {
   background: var(--glass-titlebar);
   backdrop-filter: blur(20px) saturate(180%);
 }

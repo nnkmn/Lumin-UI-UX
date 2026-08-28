@@ -59,6 +59,12 @@
   --lumin-shadow-xl: 0 12px 48px oklch(0% 0 0 / 0.5);
   --lumin-shadow-glow-primary: 0 0 20px oklch(65% 0.19 252 / 0.15);
 
+  /** 海拔层级 — Dimensional Layering 风格 */
+  --lumin-elevation-1: 0 1px 2px oklch(0% 0 0 / 0.2), 0 1px 3px oklch(0% 0 0 / 0.1);
+  --lumin-elevation-2: 0 2px 6px oklch(0% 0 0 / 0.2), 0 4px 12px oklch(0% 0 0 / 0.1);
+  --lumin-elevation-3: 0 4px 12px oklch(0% 0 0 / 0.25), 0 8px 24px oklch(0% 0 0 / 0.12);
+  --lumin-elevation-4: 0 8px 24px oklch(0% 0 0 / 0.3), 0 16px 48px oklch(0% 0 0 / 0.15);
+
   /** 组件专用变量 */
   --lumin-titlebar-bg: oklch(9% 0.005 252 / 0.85);
   --lumin-card-bg: var(--lumin-bg-secondary);
@@ -162,8 +168,8 @@
   --lumin-accent-hover: oklch(70% 0.17 252);
   --lumin-accent-soft: oklch(65% 0.19 252 / 0.1);
 
-  /** 字体栈 — 系统原生 */
-  --lumin-font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  /** 字体栈 — Inter 优先，系统原生兜底 */
+  --lumin-font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
   --lumin-font-mono: 'JetBrains Mono', ui-monospace, monospace;
 
   /** 字号系统 */

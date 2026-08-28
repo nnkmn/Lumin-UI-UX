@@ -6,115 +6,115 @@
 
 | 类名 | 效果 |
 |------|------|
-| `.px-flex` | `display: flex` |
-| `.px-flex-col` | `flex-direction: column` |
-| `.px-flex-row` | `flex-direction: row` |
-| `.px-flex-wrap` | `flex-wrap: wrap` |
-| `.px-flex-1` | `flex: 1` |
-| `.px-flex-shrink-0` | `flex-shrink: 0` |
+| `.lumin-flex` | `display: flex` |
+| `.lumin-flex-col` | `flex-direction: column` |
+| `.lumin-flex-row` | `flex-direction: row` |
+| `.lumin-flex-wrap` | `flex-wrap: wrap` |
+| `.lumin-flex-1` | `flex: 1` |
+| `.lumin-flex-shrink-0` | `flex-shrink: 0` |
 
 ### 对齐
 
 | 类名 | 效果 |
 |------|------|
-| `.px-items-start` | `align-items: flex-start` |
-| `.px-items-center` | `align-items: center` |
-| `.px-items-end` | `align-items: flex-end` |
-| `.px-items-stretch` | `align-items: stretch` |
-| `.px-justify-start` | `justify-content: flex-start` |
-| `.px-justify-center` | `justify-content: center` |
-| `.px-justify-end` | `justify-content: flex-end` |
-| `.px-justify-between` | `justify-content: space-between` |
-| `.px-justify-around` | `justify-content: space-around` |
+| `.lumin-items-start` | `align-items: flex-start` |
+| `.lumin-items-center` | `align-items: center` |
+| `.lumin-items-end` | `align-items: flex-end` |
+| `.lumin-items-stretch` | `align-items: stretch` |
+| `.lumin-justify-start` | `justify-content: flex-start` |
+| `.lumin-justify-center` | `justify-content: center` |
+| `.lumin-justify-end` | `justify-content: flex-end` |
+| `.lumin-justify-between` | `justify-content: space-between` |
+| `.lumin-justify-around` | `justify-content: space-around` |
 
 ### 间距
 
 | 类名 | 效果 |
 |------|------|
-| `.px-gap-xs` | `gap: 4px` |
-| `.px-gap-sm` | `gap: 8px` |
-| `.px-gap-md` | `gap: 12px` |
-| `.px-gap-lg` | `gap: 16px` |
-| `.px-gap-xl` | `gap: 24px` |
-| `.px-gap-2xl` | `gap: 32px` |
+| `.lumin-gap-xs` | `gap: 4px` |
+| `.lumin-gap-sm` | `gap: 8px` |
+| `.lumin-gap-md` | `gap: 12px` |
+| `.lumin-gap-lg` | `gap: 16px` |
+| `.lumin-gap-xl` | `gap: 24px` |
+| `.lumin-gap-2xl` | `gap: 32px` |
 
 ### Grid
 
 | 类名 | 效果 |
 |------|------|
-| `.px-grid` | `display: grid` |
-| `.px-grid--2` | `grid-template-columns: repeat(2, 1fr)` |
-| `.px-grid--3` | `grid-template-columns: repeat(3, 1fr)` |
-| `.px-grid--4` | `grid-template-columns: repeat(4, 1fr)` |
-| `.px-grid--auto-fill` | `grid-template-columns: repeat(auto-fill, minmax(220px, 1fr))` |
-| `.px-grid--auto-fit` | `grid-template-columns: repeat(auto-fit, minmax(220px, 1fr))` |
+| `.lumin-grid` | `display: grid` |
+| `.lumin-grid--2` | `grid-template-columns: repeat(2, 1fr)` |
+| `.lumin-grid--3` | `grid-template-columns: repeat(3, 1fr)` |
+| `.lumin-grid--4` | `grid-template-columns: repeat(4, 1fr)` |
+| `.lumin-grid--auto-fill` | `grid-template-columns: repeat(auto-fill, minmax(220px, 1fr))` |
+| `.lumin-grid--auto-fit` | `grid-template-columns: repeat(auto-fit, minmax(220px, 1fr))` |
 
 ### 定位
 
 | 类名 | 效果 |
 |------|------|
-| `.px-relative` | `position: relative` |
-| `.px-absolute` | `position: absolute` |
-| `.px-fixed` | `position: fixed` |
-| `.px-sticky` | `position: sticky` |
+| `.lumin-relative` | `position: relative` |
+| `.lumin-absolute` | `position: absolute` |
+| `.lumin-fixed` | `position: fixed` |
+| `.lumin-sticky` | `position: sticky` |
 
 ### 尺寸
 
 | 类名 | 效果 |
 |------|------|
-| `.px-w-full` | `width: 100%` |
-| `.px-h-full` | `height: 100%` |
-| `.px-min-h-screen` | `min-height: 100vh` |
+| `.lumin-w-full` | `width: 100%` |
+| `.lumin-h-full` | `height: 100%` |
+| `.lumin-min-h-screen` | `min-height: 100vh` |
 
 ### 溢出
 
 | 类名 | 效果 |
 |------|------|
-| `.px-overflow-hidden` | `overflow: hidden` |
-| `.px-overflow-auto` | `overflow: auto` |
-| `.px-overflow-x-auto` | `overflow-x: auto` |
-| `.px-overflow-y-auto` | `overflow-y: auto` |
+| `.lumin-overflow-hidden` | `overflow: hidden` |
+| `.lumin-overflow-auto` | `overflow: auto` |
+| `.lumin-overflow-x-auto` | `overflow-x: auto` |
+| `.lumin-overflow-y-auto` | `overflow-y: auto` |
 
 ### 文本
 
 | 类名 | 效果 |
 |------|------|
-| `.px-text-center` | `text-align: center` |
-| `.px-text-left` | `text-align: left` |
-| `.px-text-right` | `text-align: right` |
+| `.lumin-text-center` | `text-align: center` |
+| `.lumin-text-left` | `text-align: left` |
+| `.lumin-text-right` | `text-align: right` |
 
 ### 边距
 
 | 类名 | 效果 |
 |------|------|
-| `.px-m-0` | `margin: 0` |
-| `.px-mx-auto` | `margin-left: auto; margin-right: auto` |
-| `.px-mt-auto` | `margin-top: auto` |
+| `.lumin-m-0` | `margin: 0` |
+| `.lumin-mx-auto` | `margin-left: auto; margin-right: auto` |
+| `.lumin-mt-auto` | `margin-top: auto` |
 
 ### 内边距
 
 | 类名 | 效果 |
 |------|------|
-| `.px-p-0` | `padding: 0` |
-| `.px-px-lg` | `padding-left/right: 16px` |
-| `.px-py-lg` | `padding-top/bottom: 16px` |
+| `.lumin-p-0` | `padding: 0` |
+| `.lumin-px-lg` | `padding-left/right: 16px` |
+| `.lumin-py-lg` | `padding-top/bottom: 16px` |
 
 ### 显示
 
 | 类名 | 效果 |
 |------|------|
-| `.px-hidden` | `display: none` |
-| `.px-block` | `display: block` |
-| `.px-inline-block` | `display: inline-block` |
-| `.px-inline-flex` | `display: inline-flex` |
+| `.lumin-hidden` | `display: none` |
+| `.lumin-block` | `display: block` |
+| `.lumin-inline-block` | `display: inline-block` |
+| `.lumin-inline-flex` | `display: inline-flex` |
 
 ### 响应式
 
 | 类名 | 效果 |
 |------|------|
-| `.px-mobile-hidden` | 在移动端隐藏 |
-| `.px-mobile-block` | 在移动端显示 |
-| `.px-mobile-flex` | 在移动端flex |
+| `.lumin-mobile-hidden` | 在移动端隐藏 |
+| `.lumin-mobile-block` | 在移动端显示 |
+| `.lumin-mobile-flex` | 在移动端flex |
 
 ---
 
@@ -272,13 +272,13 @@
 
 | 类名 | 效果 |
 |------|------|
-| `.px-divider` | 水平分割线 |
-| `.px-divider--vertical` | 垂直分割线 |
+| `.lumin-divider` | 水平分割线 |
+| `.lumin-divider--vertical` | 垂直分割线 |
 
 ### 滚动条
 
 | 类名 | 效果 |
 |------|------|
-| `.px-scrollbar-hidden` | 隐藏滚动条 |
-| `.px-scrollbar-thin` | 细滚动条 |
-| `.px-scrollbar-thick` | 粗滚动条 |
+| `.lumin-scrollbar-hidden` | 隐藏滚动条 |
+| `.lumin-scrollbar-thin` | 细滚动条 |
+| `.lumin-scrollbar-thick` | 粗滚动条 |

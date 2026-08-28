@@ -122,16 +122,16 @@
 
 ### CSS 类名
 
-- 组件: `px-{component}`
-- 变体: `px-{component}--{variant}`
-- 元素: `px-{component}__{element}`
+- 组件: `lumin-{component}`
+- 变体: `lumin-{component}--{variant}`
+- 元素: `lumin-{component}__{element}`
 - 状态: `.open`, `.active`, `.selected`, `.disabled`, `.error`
 - 尺寸: `--sm`, `--md`, `--lg`
 
 ### CSS 变量
 
 - 设计令牌: `--{category}-{property}`
-- 组件变量: `--px-{component}-{property}`
+- 组件变量: `--lumin-{component}-{property}`
 - 主题变量: 在 `[data-theme]` 选择器中定义
 
 ---

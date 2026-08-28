@@ -109,7 +109,7 @@ Lumin 使用 Quart-out 物理缓动，创造自然的运动感。
 按钮内部创建顶部高光渐变。
 
 ```css
-.px-btn--primary::before {
+.lumin-btn--primary::before {
   content: '';
   position: absolute;
   top: 0; left: 0; right: 0;
