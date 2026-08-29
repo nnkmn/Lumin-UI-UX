@@ -2,7 +2,7 @@
 
 > 现代、精致、沉浸式的视觉设计系统 | 玻璃态 + 微色调中性色 | 纯 CSS 零依赖
 
-**[在线预览](https://luminuiux.linpork.top/)**
+**[在线预览](https://luminuiux.meow-studio.tech/)**
 
 ---
 
